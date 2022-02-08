@@ -8,9 +8,14 @@ import random
 import tkinter as tk
 #VARIBLES
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m']
-debugColor = 0
+colour = "\x1b[0m"
+debugMode = ["idle","windows"]
 #FUNCTIONS
-
+def debugCheck(debugID):
+     global debugMode
+     for i in debugMode:
+        if(i == debugID) :
+            return(i)
 def clear():
     command = 'clear'
     if os.name in ('nt', 'dos'):
@@ -28,11 +33,14 @@ def menu(printThis):
     print ("##################################################################################################################")
 
 def logo():
+    
     global randColor
-    global debugColor
-    if debugColor == "1":
-        random.choice(randColor)
-    print(randColo + """
+    global colour
+    
+    debug = debugCheck("Color") #Checks if color has been set in debug mode
+    if debug != ("Color"): #if it isnt then run the randomizer
+      colour = random.choice(randColor) #this stops the randomizer running even if you have set a colur  
+    print(colour + """
     
  _____  ____     ___  ___    ___    __ __  __  _____     _____   ____  _____ ______      _____  ____ _____ __ __ 
 |     ||    \   /  _]|   \  |   \  |  |  ||  |/ ___/    |     | /    |/ ___/|      |    |     ||    / ___/|  |  |
@@ -44,14 +52,16 @@ def logo():
                                                                                                                  
 
     """ + '\x1b[0m')
+    
 #MAIN FUNCTIONS
 def main():
+ global colour
  clear()   
  user = 999
  logo() #Print the logo
  main_menu = ["Customer Details","Fish and Chip Orders","Pickup or Delivery","Exit"]
  menu(main_menu) #Print menu
- user = input ("Please make a choice via number and then press enter to confirm: ")
+ user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
     print("0")
     main()
@@ -75,18 +85,32 @@ def main():
         main()
 #DEBUG
 def DEBUG():
+ global colour
+ global debugMode
  clear()   
  user = 999
+ userColor = 0
  logo() #Print the logo
- debug_menu = ["Select Menu Color","Exit"]
+ debug_menu = ["Select Theme Color","Exit"]
  menu(debug_menu) #Print menu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
-    print("0")
-    main()
+    print(str("Example Colors: Black: '\033[30m', Red: '\033[31m', DarkGreen: '\033[32m', DarkYellow: '\033[33m'")) # THIS IS FOR DEBUGGING PURPOSES ONLY SO THATS WHY IT HASNT BE SIMPLIFIED
+    newcolour = input("[MUST BE A NUMBER OR WONT WORK] SELECT COLOR:")
+    
+    print(newcolour)
+    print("EXAMPLE TEXT")
+    print('\x1b[0m')
+    colour = str(newcolour)
+    time.sleep(1)
+    debugMode.append("Color") 
+    DEBUG()
  elif user == "1":
       print("1")
-      main()   
+      main()
+ else:
+        error("Not an option")
+        main()
 #PROGRAM
 print ("##################################################################################################################")
 main()
