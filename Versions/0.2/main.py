@@ -3,16 +3,24 @@
 
 #DEPENDICES
 import os
+import os.path
 import sys
 import time
 import random
+import tempfile
 import tkinter as tk
 #VARIBLES
-tempPath = "E:/"
+
+tempPath = tempfile.gettempdir() 
+
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m']
 colour = "\x1b[0m"
 debugMode = ["idle","windows","DEBUG"] # {idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu}
 #FUNCTIONS
+def reset():
+     fileExists = os.path.isfile(tempPath+"\session.txt") #Check if it exists
+     print(fileExists)
+     print(tempPath+"\session.txt")
 def in_idle():
     try:
         return sys.stdin.__module__.startswith('idlelib')
@@ -82,7 +90,7 @@ def CustomerDetails():
  allowDebug = debugCheck("DEBUG")
  logo() #Print the logo
  print ("##################################################################################################################")
- f = open(tempPath+"session.txt", "a")
+ f = open(tempPath+"\session.txt", "a")
  name = input (colour+"Please enter your name: "+'\x1b[0m')
  f.write("Customer Name: "+name)
  print("")
@@ -139,7 +147,7 @@ def DEBUG():
  user = 999
  userColor = 0
  logo() #Print the logo
- debug_menu = ["Select Theme Color","Exit"]
+ debug_menu = ["Select Theme Color","Temp File Location","Exit"]
  menu(debug_menu) #Print menu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -163,25 +171,30 @@ def DEBUG():
     time.sleep(1)
     debugMode.append("Color") 
     DEBUG()
- elif user == "1":
-      print("1")
+
+ elif user == "1":   
+     print(tempfile.gettempdir())
+     time.sleep(1.5)
+     DEBUG()
+ elif user == "2":
+      print("2")
       main()
  else:
         error("Not an option")
         main()
 #PROGRAM
 print ("##################################################################################################################")
-idleDebug = debugCheck("idle")
-
-f = open(tempPath+"session.txt", "a")
-f.write("----------------")
+f = open(tempPath+"\session.txt", "a")
+idleCheck = in_idle() # NOT PLACED IN VARIBLES BECUASE THEN in_idle() WOULD BE DEFIEND AFTER BEIGN CALLED WHICH RESULTS IN AN ERROR
+idleDebug = debugCheck("idle")#SAME HERE
+f.write("----------------") #Header the doc (used to indecate a break between sessions in the history)
 f.close()
-idleCheck = in_idle()
-if idleDebug != "idle":
+reset()
+if idleCheck != True: #If its not in idle then run the program normally
      main()
-elif idleCheck == True:
-        if idleDebug == "idle":
+elif idleCheck == True: #IF it is then run the next check
+        if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
               error("Runnning in idle with debug mode")
               main()
-        else:
+        else: #else show the idle menu
               runInIdle()
