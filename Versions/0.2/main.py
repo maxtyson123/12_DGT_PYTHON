@@ -8,11 +8,16 @@ import time
 import random
 import tkinter as tk
 #VARIBLES
-tempPath = "F:/"
+tempPath = "E:/"
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m']
 colour = "\x1b[0m"
-debugMode = ["idle","windows","DEBUG"]
+debugMode = ["idle","windows","DEBUG"] # {idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu}
 #FUNCTIONS
+def in_idle():
+    try:
+        return sys.stdin.__module__.startswith('idlelib')
+    except AttributeError:
+        return True
 def debugCheck(debugID):
      global debugMode
      for i in debugMode:
@@ -86,6 +91,7 @@ def CustomerDetails():
  pickUpOrDelivery = input (colour+"Please choose an option"+'\x1b[0m')
  if pickUpOrDelivery == "0":
       #Deliver Code
+      print("DELIVERY")
  f.write("Order Type: "+pickUpOrDelivery)
  CustomerDetails = ["Frozen","Cooked"]
  menu(CustomerDetails) #Print menu
@@ -166,16 +172,16 @@ def DEBUG():
 #PROGRAM
 print ("##################################################################################################################")
 idleDebug = debugCheck("idle")
-idleCheck = "idlelib" in sys.modules
 
 f = open(tempPath+"session.txt", "a")
 f.write("----------------")
 f.close()
-
+idleCheck = in_idle()
 if idleDebug != "idle":
-     print("Runnning in idle with debug mode")
      main()
-elif idleCheck == "True":
-        runInIdle()
-else:
-    main() 
+elif idleCheck == True:
+        if idleDebug == "idle":
+              error("Runnning in idle with debug mode")
+              main()
+        else:
+              runInIdle()
