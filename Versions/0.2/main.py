@@ -15,17 +15,21 @@ tempPath = tempfile.gettempdir()
 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m']
 colour = "\x1b[0m"
-debugMode = ["idle","windows","DEBUG"] # {idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu}
+debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} 
 #FUNCTIONS
 def reset():
      fileExists = os.path.isfile(tempPath+"\session.txt") #Check if it exists
-     print(fileExists)
-     print(tempPath+"\session.txt")
+     debug = debugCheck("data") #Checks if color has been set in debug mode
+     if debug == "data":
+          print("fileExists: " + str(fileExists))
+          print("tempPath: " + tempPath+"\session.txt")
+     
 def in_idle():
     try:
         return sys.stdin.__module__.startswith('idlelib')
     except AttributeError:
         return True
+
 def debugCheck(debugID):
      global debugMode
      for i in debugMode:
@@ -147,7 +151,7 @@ def DEBUG():
  user = 999
  userColor = 0
  logo() #Print the logo
- debug_menu = ["Select Theme Color","Temp File Location","Exit"]
+ debug_menu = ["Select Theme Color","Temp File Location","Print Data While running","Exit"]
  menu(debug_menu) #Print menu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -177,24 +181,44 @@ def DEBUG():
      time.sleep(1.5)
      DEBUG()
  elif user == "2":
-      print("2")
+      debugMode.append("data")
+      DEBUG()
+ elif user == "3":
       main()
  else:
         error("Not an option")
         main()
 #PROGRAM
+debug = debugCheck("data") #Checks if data has been set in debug mode
+if debug == "data":
+ print("Defined Functions, Set vars, Imported dependices")        
 print ("##################################################################################################################")
 f = open(tempPath+"\session.txt", "a")
-idleCheck = in_idle() # NOT PLACED IN VARIBLES BECUASE THEN in_idle() WOULD BE DEFIEND AFTER BEIGN CALLED WHICH RESULTS IN AN ERROR
-idleDebug = debugCheck("idle")#SAME HERE
 f.write("----------------") #Header the doc (used to indecate a break between sessions in the history)
 f.close()
+if debug == "data":
+ print("Opened File, Set file header")        
+idleCheck = "idlelib" in sys.modules # NOT PLACED IN VARIBLES BECUASE THEN in_idle() WOULD BE DEFIEND AFTER BEIGN CALLED WHICH RESULTS IN AN ERROR
+idleDebug = debugCheck("idle")#SAME HERE
+if debug == "data":
+ print("Checked for idle and for idle debug tag")
+ print("idleCheck: "+str(idleCheck))
+ print("idleDebug: "+idleDebug)
 reset()
-if idleCheck != True: #If its not in idle then run the program normally
-     main()
-elif idleCheck == True: #IF it is then run the next check
+if debug == "data":
+ print("Reset files")
+
+if idleCheck == True: #IF it is then run the next check
         if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
+              if debug == "data":
+                print("idle debug tag set, dont show warning menu") 
               error("Runnning in idle with debug mode")
               main()
         else: #else show the idle menu
-              runInIdle()
+             if debug == "data":
+               print("idle debug tag not set, showing warning")
+             runInIdle()
+else:
+     if debug == "data":
+      print("idle check returned false, running as normal")
+     main()   
