@@ -67,6 +67,15 @@ def printSingleMenu(printThis):
     for x in range(len(printThis)): #for everything in the array print it plus its number
         print ("["+str(x)+"] "+printThis[x])
     print ("##################################################################################################################")
+def printDualMenu(printThis,priceThis):
+    repeat = 0
+    print ("##################################################################################################################")
+    for x in range(len(printThis)): #for everything in the array print it plus its number
+        padding="               "
+        priceTag = "#"+priceThis[x]+"#"
+        print ("["+str(x)+"] "+printThis[x].ljust(100)[:100]+priceTag.ljust(8)[:8])
+        
+    print ("##################################################################################################################")
 
 def logo():
     
@@ -103,6 +112,23 @@ def runInIdle():
       quit()   
     
 #MAIN FUNCTIONS
+def fishMenu():
+ global colour
+ clear()   
+ user = 999
+ logo() #Print the logo
+ item = ["Shark", "Flounder", "Cod", "Gurnet", "CUSTOM FISH", "CUSTOM FISH", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "CUSTOM FISH", "CUSTOM FISH"]
+ price = ["$4.10","$4.10","$4.10","$4.10","$4.10","$4.10","$7.20","$7.20","$7.20","$7.20","$7.20","$7.20"]
+ printDualMenu(item, price) #Print printDualMenu
+ user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
+ if user == "0":
+    print("0")
+    CustomerDetails()
+ elif user == "1":
+      print("1")
+ else:
+        error("Not an option")
+        main()     
 def CustomerDetails():   
  global colour
  global customerData
@@ -192,7 +218,7 @@ def main():
     CustomerDetails()
  elif user == "1":
       print("1")
-      main()   
+      fishMenu()   
  elif user == "2":
       print("2")
       main()
