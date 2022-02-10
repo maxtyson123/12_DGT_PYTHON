@@ -9,14 +9,23 @@ import time
 import random
 import tempfile
 import tkinter as tk
+from datetime import date
+
 #VARIBLES
+today = str(date.today())
 totalCost = "0.00"
 tempPath = tempfile.gettempdir() 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m']
 colour = "\x1b[0m"
-debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} 
+debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file}
 customerData = [] #Format: ["name: the persons name","phone number","dlivery(0) or pick up(1)","frozen(0) or cooked(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+def setHistory():
+     historyDoc = open("history.txt", 'a+')
+     tempdoc = open(tempPath+"\session.txt", 'r')
+     historyDoc.write(tempdoc.read())
+     historyDoc.close()
+     tempdoc.close()
 def printAFile(filepath):
      file = open(filepath, "r").read()
      print(file)
@@ -190,8 +199,13 @@ def main():
  elif user == "3":
       print("3")
       main()
- elif user == "5":
-      print("5")
+ elif user == "4":
+      print("4")
+      if ignoreHistory != "ignoreHistory":
+       setHistory()    
+       f = open("history.txt", "a")     
+       f.write("Exited, Not finished"+ "\n") #Used to know when the order was started in history file (ALSO CREATES IT)
+       f.close()
       quit() 
  elif user == "DEBUG" and allowDebug == "DEBUG":      
       print("DEBUG MODE")
@@ -209,7 +223,7 @@ def DEBUG():
  user = 999
  userColor = 0
  logo() #Print the logo
- debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","Exit"]
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Change Total Cost","Exit"]
  printSingleMenu(debug_printSingleMenu) #Print printSingleMenu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -248,14 +262,21 @@ def DEBUG():
  elif user == "4":
       printAFile(tempPath+"\session.txt")
       time.sleep(1.5)
-      DEBUG()     
+      DEBUG()
  elif user == "5":
+      printAFile("history.txt")
+      time.sleep(1.5)
+      DEBUG()
+ elif user == "6":
+      print("change total cost") 
+ elif user == "7":
       main()
  else:
         error("Not an option")
         main()
 #PROGRAM
 debug = debugCheck("data") #Checks if data has been set in debug mode
+ignoreHistory = debugCheck("ignoreHistory") #Checks if ignoreHistory has been set in debug mode, this is just so Im not creating loads of entrys into the file while testing
 if debug == "data":
  print("Defined Functions, Set vars, Imported dependices")
  reset()
@@ -265,6 +286,10 @@ print ("########################################################################
 f = open(tempPath+"\session.txt", "a")
 f.write("----------------" + "\n") #Header the doc (used to indecate a break between sessions in the history)
 f.close()
+if ignoreHistory != "ignoreHistory":
+     f = open("history.txt", "a")     
+     f.write("Today's date:"+ today + "\n") #Used to know when the order was started in history file (ALSO CREATES IT)
+     f.close()
 if debug == "data":
  print("Opened File, Set file header")        
 idleCheck = "idlelib" in sys.modules # NOT PLACED IN VARIBLES BECUASE THEN in_idle() WOULD BE DEFIEND AFTER BEIGN CALLED WHICH RESULTS IN AN ERROR

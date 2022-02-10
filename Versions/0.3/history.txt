@@ -1,0 +1,13 @@
+Today's date:2022-02-10
+Today's date:2022-02-10
+Today's date:2022-02-10
+Today's date:2022-02-10
+Exited, Not finishedToday's date:2022-02-10
+Exited, Not finishedToday's date:2022-02-10
+----------------
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Exited, Not finishedToday's date:2022-02-10
+Today's date:2022-02-10
