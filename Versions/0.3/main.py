@@ -10,14 +10,23 @@ import random
 import tempfile
 import tkinter as tk
 #VARIBLES
+totalCost = "0.00"
 tempPath = tempfile.gettempdir() 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m']
 colour = "\x1b[0m"
-debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} 
-customerData = [] #Format: ["name: the persons name","dlivery(0) or pick up(1)","frozen(0) or cooked(1)","phone number","adress (last becuase its optinal)"]
+debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} 
+customerData = [] #Format: ["name: the persons name","phone number","dlivery(0) or pick up(1)","frozen(0) or cooked(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+def printAFile(filepath):
+     file = open(filepath, "r").read()
+     print(file)
 def reset():
+     global tempPath
      fileExists = os.path.isfile(tempPath+"\session.txt") #Check if it exists
+     if fileExists == True:
+          f = open(tempPath+"\session.txt","r+")
+          f.truncate(0)
+          f.close()
      debug = debugCheck("data") #Checks if color has been set in debug mode
      if debug == "data":
           print("fileExists: " + str(fileExists))
@@ -43,7 +52,7 @@ def error(message):
     print(" ")
     print('\033[31m' + 'Error: ' + message + '\x1b[0m')
     time.sleep(3)
-def menu(printThis):
+def printSingleMenu(printThis):
     repeat = 0
     print ("##################################################################################################################")
     for x in range(len(printThis)): #for everything in the array print it plus its number
@@ -74,8 +83,8 @@ def runInIdle():
  user = 999
  logo() #Print the logo
  print("NOTE: Running in Idle can make the user experience worse (Console wont clear and ANSI colors dont work.)")
- idle_menu = ["Continue","Exit"]
- menu(idle_menu) #Print menu
+ idle_printSingleMenu = ["Continue","Exit"]
+ printSingleMenu(idle_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
     print("Running In Idle")
@@ -87,38 +96,87 @@ def runInIdle():
 #MAIN FUNCTIONS
 def CustomerDetails():   
  global colour
+ global customerData
  global tempPath
  clear()   
  user = 999
- allowDebug = debugCheck("DEBUG")
+ printData = debugCheck("data")
  logo() #Print the logo
  print ("##################################################################################################################")
  f = open(tempPath+"\session.txt", "a") #Doc used for history
- name = input (colour+"Please enter your name: "+'\x1b[0m')
- f.write("Customer Name: "+name)
- print("")
- CustomerDetails = ["Delivery","Pick Up"]
- menu(CustomerDetails) #Print menu
- pickUpOrDelivery = input (colour+"Please choose an option"+'\x1b[0m')
- if pickUpOrDelivery == "0":
-      #Deliver Code
-      print("DELIVERY")
- f.write("Order Type: "+pickUpOrDelivery)
- CustomerDetails = ["Frozen","Cooked"]
- menu(CustomerDetails) #Print menu
- 
- frozenOrCooked = input (colour+"Please choose an option"+'\x1b[0m')
- f.write("Order Type: "+frozenOrCooked)
- f.close()
+ if len(customerData) != 0:
+    customerData.clear() # resets the user data  
+    if printData == "data":
+      print("Reseting file")      
+ name = input (colour+"Please enter your name: "+'\x1b[0m') #Yes i know it allows a number but thats  bc what if your named prince harry the 3rd? 
+ f.write("Customer Name: "+name+"\n")
+ customerData.append(name)
+ if printData == "data":
+      print("Got and Set Name")   
+ phoneNumber = input (colour+"Please enter your phone number: "+'\x1b[0m')
+ phoneisNumber = phoneNumber    
+ try:
+    int(phoneNumber) #trys to convert to int
+    phoneisNumber = True
+ except ValueError: #if it cant the return error
+    phoneisNumber = False
 
+ if phoneisNumber == False:
+   error("Not an number, Re running printSingleMenu")
+   customerData.clear() # resets the user data
+   CustomerDetails()
+ f.write("Customer Phone Number: "+phoneNumber+"\n")
+ customerData.append(phoneNumber)
+ if printData == "data":
+      print("Got phone number")   
+ print("")
+
+ frozenOrCooked = ["Frozen","Cooked"]
+
+ printSingleMenu(frozenOrCooked) #Print printSingleMenu
+ pickFrozenOrCooked = input (colour+"Please choose an option: "+'\x1b[0m')
+ if pickFrozenOrCooked == "0":
+       f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
+       customerData.append(pickFrozenOrCooked)
+ elif pickFrozenOrCooked == "1":
+        customerData.append(pickFrozenOrCooked)
+        f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
+        
+ else:
+   error("Not an option, Re running printSingleMenu")
+   customerData.clear() # resets the user data
+   CustomerDetails()
+ print("")
+ if printData == "data":
+      print("Got Frozen Or Cooked number")   
+ pickUpOrDelivery = ["PickUp","Delivery"]
+ printSingleMenu(pickUpOrDelivery)
+ pickPickUpOrDelivery = input (colour+"Please choose an option: "+'\x1b[0m')
+ if pickPickUpOrDelivery == "0":
+       f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+       customerData.append(pickPickUpOrDelivery)
+ elif pickPickUpOrDelivery == "1":
+        customerData.append(pickPickUpOrDelivery)
+        f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+ else:
+   error("Not an option, Re running printSingleMenu")
+   customerData.clear() # resets the user data
+   CustomerDetails()
+ if printData == "data":
+      print("Got Pick Up Or Delivery number")     
+ f.close()
+ print("All details entered")
+ time.sleep(.5)
+ main()
+     
 def main():
  global colour
  clear()   
  user = 999
  allowDebug = debugCheck("DEBUG")
  logo() #Print the logo
- main_menu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current","Exit"]
- menu(main_menu) #Print menu
+ main_printSingleMenu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current","Exit"]
+ printSingleMenu(main_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
     print("0")
@@ -145,18 +203,20 @@ def main():
 def DEBUG():
  global colour
  global debugMode
+ global customerData
+ global tempPath
  clear()   
  user = 999
  userColor = 0
  logo() #Print the logo
- debug_menu = ["Select Theme Color","Temp File Location","Print Data While running","Exit"]
- menu(debug_menu) #Print menu
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","Exit"]
+ printSingleMenu(debug_printSingleMenu) #Print printSingleMenu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
       
     print(str("Colors:"))
-    debug_menu = ["Black","Red","DarkGreen","DarkYellow"]
-    menu(debug_menu) 
+    debug_printSingleMenu = ["Black","Red","DarkGreen","DarkYellow"]
+    printSingleMenu(debug_printSingleMenu) 
     debugcol = input("SELECT COLOR:")
     if debugcol == "0":
          newcolour = "\033[30m"
@@ -182,6 +242,14 @@ def DEBUG():
       debugMode.append("data")
       DEBUG()
  elif user == "3":
+      printSingleMenu(customerData)
+      time.sleep(1.5)
+      DEBUG()
+ elif user == "4":
+      printAFile(tempPath+"\session.txt")
+      time.sleep(1.5)
+      DEBUG()     
+ elif user == "5":
       main()
  else:
         error("Not an option")
@@ -189,10 +257,13 @@ def DEBUG():
 #PROGRAM
 debug = debugCheck("data") #Checks if data has been set in debug mode
 if debug == "data":
- print("Defined Functions, Set vars, Imported dependices")        
+ print("Defined Functions, Set vars, Imported dependices")
+ reset()
+if debug == "data":
+ print("Reset files")
 print ("##################################################################################################################")
 f = open(tempPath+"\session.txt", "a")
-f.write("----------------") #Header the doc (used to indecate a break between sessions in the history)
+f.write("----------------" + "\n") #Header the doc (used to indecate a break between sessions in the history)
 f.close()
 if debug == "data":
  print("Opened File, Set file header")        
@@ -202,17 +273,15 @@ if debug == "data":
  print("Checked for idle and for idle debug tag")
  print("idleCheck: "+str(idleCheck))
  print("idleDebug: "+idleDebug)
-reset()
-if debug == "data":
- print("Reset files")
+
 
 if idleCheck == True: #IF it is then run the next check
         if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
               if debug == "data":
-                print("idle debug tag set, dont show warning menu") 
+                print("idle debug tag set, dont show warning printSingleMenu") 
               error("Runnning in idle with debug mode")
               main()
-        else: #else show the idle menu
+        else: #else show the idle printSingleMenu
              if debug == "data":
                print("idle debug tag not set, showing warning")
              runInIdle()
