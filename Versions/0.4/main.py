@@ -13,7 +13,7 @@ from datetime import date
 
 #VARIBLES
 today = str(date.today())
-totalCost = "0.00"
+totalCost = 0.00
 tempPath = tempfile.gettempdir()
 colour = "\x1b[0m"
 amtOfFish = 0
@@ -29,8 +29,8 @@ def addToOrder(strItemID, foodList, priceList):
      global userOrderPrice
      global amtOfFish #Global becuase it is called later on
      global totalCost
-     amt = input (colour+" How many fish would you like [1-7]: "+'\x1b[0m')
-     itemID = int(strItemID)  
+     itemID = int(strItemID)
+     amt = input (colour+" How many "+foodList[itemID] +" would you like [1-7]: "+'\x1b[0m')
      try:
          int(amt) #trys to convert to int
          isInt = True
@@ -42,16 +42,18 @@ def addToOrder(strItemID, foodList, priceList):
       fishMenu() #go back to the menu
      for x in range(int(amt)):
        if amtOfFish == 7:
-         error("Max amount for this fish has been ordered")
+         error("Max amount for "+foodList[itemID] +" has been ordered")
          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
        else:
-        print("Added item: " + str(x+1)) #this is to show the user that the item actually has been added,  add one to make it count properly bc lists idex starting at 0   
+        print("Added "+foodList[itemID] +": " + str(x+1)) #this is to show the user that the item actually has been added,  add one to make it count properly bc lists idex starting at 0   
         amtOfFish = amtOfFish + 1   #add to the max
+        totalCost = totalCost + priceList[itemID]   #add to the cost
         userOrder.append(foodList[itemID])
         userOrderPrice.append(priceList[itemID])
         f = open(tempPath+"\session.txt", "a")
-        f.write("Item: " + foodList[itemID] + ", Price: " + priceList[itemID] + "\n") #add to the doc
+        f.write("Item: " + foodList[itemID] + ", Price: " + str("{:.2f}".format(priceList[x])) + "\n") #add to the doc
         f.close()
+        fishMenu() #go back to the menu
 def setHistory():
      historyDoc = open("history.txt", 'a+') #open the history doc
      tempdoc = open(tempPath+"\session.txt", 'r') #open the tempdoc
@@ -102,7 +104,7 @@ def printDualMenu(printThis,priceThis):
     repeat = 0
     print ("##################################################################################################################")
     for x in range(len(printThis)): #for everything in the array print it plus its number 
-        priceTag = "#"+priceThis[x]+"#" #this is to make the whole output is formated with ljust
+        priceTag = "#"+"$"+str("{:.2f}".format(priceThis[x]))+"#" #this is to make the whole output is formated with ljust
         numbering ="["+str(x)+"] "      #if it wasnt like this then we would have to calculate and add a ljust for everything in the print function
         print (numbering.ljust(5)[:5]+printThis[x].ljust(102)[:102]+priceTag.ljust(8)[:8])
         
@@ -156,20 +158,24 @@ def fishMenu():
  user = 999
  logo() #Print the logo
  item = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","1 Scoop Of Chips","Back"]
- price = ["$4.10","$4.10","$4.10","$4.10","$4.10","$4.10","$7.20","$7.20","$7.20","$7.20","$7.20","$7.20","$3.00",""]
+ price = [4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00,0.00]
  printDualMenu(item, price) #Print printDualMenu
- user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
- if user == "0":
-    addToOrder(user,item,price)
-    fishMenu()
- elif user == "1":
+ user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')   
+ try:
+   int(user) #trys to convert to int
+   isInt = True
+ except ValueError: #if it cant then return error
+      isInt = False
+
+ if isInt != False: #if it is not a error    
+  if int(user) in range(0,12): #i tried to use range to make it more scalable and it worked
      addToOrder(user,item,price)
-     fishMenu()
- elif user == "13":
+     fishMenu()     
+ elif int(user) == 13:
      main()   
  else:
         error("Not an option")
-        fishMenu0()     
+        fishMenu()     
 def CustomerDetails():   
  global colour
  global customerData
@@ -288,11 +294,12 @@ def DEBUG():
  global tempPath
  global userOrder
  global userOrderPrice
+ global totalCost
  clear()   
  user = 999
  userColor = 0
  logo() #Print the logo
- debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Change Total Cost","Print User Items","Exit"]
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Exit"]
  printSingleMenu(debug_printSingleMenu) #Print printSingleMenu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -337,7 +344,8 @@ def DEBUG():
       time.sleep(1.5)
       DEBUG()
  elif user == "6":
-      print("change total cost")
+      print(str("{:.2f}".format(totalCost)))
+      DEBUG()
  elif user == "7":
        printDualMenu(userOrder, userOrderPrice)
        debug()
