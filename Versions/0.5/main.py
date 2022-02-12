@@ -23,7 +23,7 @@ randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[3
 userOrder = []
 userOrderPrice = []
 debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file}
-customerData = [] #Format: ["name: the persons name","phone number","dlivery(0) or pick up(1)","frozen(0) or cooked(1)","adress (last becuase its optinal)"]
+customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
 def addToOrder(strItemID, foodList, priceList):
      global userOrder
@@ -39,6 +39,7 @@ def addToOrder(strItemID, foodList, priceList):
       isInt = False
 
      if isInt == False: #if it is a error
+          
       error("Not an number, Re running.") #print the error
       fishMenu() #go back to the menu
      for x in range(int(amt)):
@@ -112,14 +113,12 @@ def printDualMenu(printThis,priceThis):
     print ("##################################################################################################################")
 
 def logo():
-    
-    global randColor
-    global colour
-    
-    debug = debugCheck("Color") #Checks if color has been set in debug mode
-    if debug != ("Color"): #if it isnt then run the randomizer
+ global colour
+ global randColor  
+ debug = debugCheck("Color") #Checks if color has been set in debug mode
+ if debug != ("Color"): #if it isnt then run the randomizer
       colour = random.choice(randColor) #this stops the randomizer running even if you have set a colur  
-    print("" + colour + """
+ print("" + colour + """
     
  _____  ____     ___  ___    ___    __ __  __  _____     _____   ____  _____ ______      _____  ____ _____ __ __ 
 |     ||    \   /  _]|   \  |   \  |  |  ||  |/ ___/    |     | /    |/ ___/|      |    |     ||    / ___/|  |  |
@@ -152,6 +151,73 @@ def runInIdle():
       quit()   
     
 #MAIN FUNCTIONS
+def runAgain():
+ global colour
+ global userOrder
+ global userOrderPrice
+ clear()   
+ user = 999
+ allowDebug = debugCheck("DEBUG")
+ logo() #Print the logo
+ main_printSingleMenu = ["Take another order","Exit"]
+ printSingleMenu(main_printSingleMenu) #Print printSingleMenu
+ user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
+ if user == "0":
+    print("0")
+    reset() #Rest the file
+    
+    userOrder.clear()
+    userOrderPrice.clear()
+    customerData.clear()
+    amtOfFish = 0 #reset the fish
+    totalCost = 0.00 # zero out the price
+    main()
+ elif user == "1":
+      print("1")
+      quit()   
+def finish():
+ global colour
+ global userOrder
+ global userOrderPrice
+ global totalCost
+ global customerData
+ clear()   
+ user = 999
+ logo() #Print the logo
+ if len(customerData) == 0 or len(userOrder) == 0:
+     error("Customer Info Not Entered")
+     main()
+ print("---ITEMS---")
+ printDualMenu(userOrder, userOrderPrice)
+
+ print("---TYPES---")
+ if customerData[3] == "0":
+  print("Order Type: "+"Delivery")
+  totalCost = totalCost + 5.00
+ else:
+  print("Order Type: "+"Pick Up")
+ if customerData[2] == "0":
+  print("Order Type: "+"Frozen")
+  for i in userOrderPrice: #for everything in the array:
+       totalCost = totalCost - 1.05 #take away the 
+ else:
+  print("Order Type: "+"Cooked")
+ print ("##################################################################################################################")
+ print("---CUSTOMER INFO---")
+ print("Name: "+str(customerData[0]))
+ print("Phonenumber: "+str(customerData[1]))
+ if customerData[3] == "0":
+  print("Adress: "+str(customerData[4]))
+ print ("##################################################################################################################")
+ print("---COST---")
+ print("Price: $"+"{:.2f}".format(totalCost))
+ print ("##################################################################################################################")
+ setHistory()    
+ f = open("history.txt", "a")     
+ f.write("Finished"+ "\n")
+ f.close()
+ input("Press enter to continue")
+ runAgain()
 def fishMenu():
  global colour
 
@@ -205,7 +271,7 @@ def CustomerDetails():
     phoneisNumber = False
 
  if phoneisNumber == False:
-   error("Not an number, Re running printSingleMenu")
+   error("Not an number, Re running ")
    customerData.clear() # resets the user data
    CustomerDetails()
  f.write("Customer Phone Number: "+phoneNumber+"\n")
@@ -226,13 +292,13 @@ def CustomerDetails():
         f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
         
  else:
-   error("Not an option, Re running printSingleMenu")
+   error("Not an option, Re running ")
    customerData.clear() # resets the user data
    CustomerDetails()
  print("")
  if printData == "data":
       print("Got Frozen Or Cooked number")   
- pickUpOrDelivery = ["PickUp","Delivery"]
+ pickUpOrDelivery = ["Delivery","PickUp"]
  printSingleMenu(pickUpOrDelivery)
  pickPickUpOrDelivery = input (colour+"Please choose an option: "+'\x1b[0m')
  if pickPickUpOrDelivery == "0":
@@ -242,11 +308,15 @@ def CustomerDetails():
         customerData.append(pickPickUpOrDelivery)
         f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
  else:
-   error("Not an option, Re running printSingleMenu")
+   error("Not an option, Re running ")
    customerData.clear() # resets the user data
    CustomerDetails()
  if printData == "data":
       print("Got Pick Up Or Delivery number")     
+ if customerData[3] == "0":
+  adress = input (colour+"Please enter your adress: "+'\x1b[0m')
+  customerData.append(adress)
+  f.write("Adress: "+adress+"\n")
  f.close()
  print("All details entered")
  time.sleep(.5)
@@ -271,7 +341,7 @@ def main():
       fishMenu()   
  elif user == "2":
       print("2")
-      main()
+      finish()
  elif user == "3":
       print("3")
       setHistory()    
@@ -279,8 +349,9 @@ def main():
       f.write("Canceled, Not finished"+ "\n") #Used to know why the order was canceled in history file
       f.close()
       reset() #Rest the file
-      userOrder = [] #reset the order
-      userOrderPrice = [] #reset the prices
+      userOrder.clear()
+      userOrderPrice.clear()
+      customerData.clear()
       amtOfFish = 0 #reset the fish
       totalCost = 0.00 # zero out the price
       main()
