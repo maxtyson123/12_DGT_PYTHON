@@ -242,3 +242,46 @@ Finished
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-13
+Customer Name: 0
+Customer Phone Number: 0
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 1
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 7.20
+Finished
+
+----------------
+Today's date:2022-02-13
+Customer Name: Max
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 0
+Adress: --\
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 7.20
+Finished

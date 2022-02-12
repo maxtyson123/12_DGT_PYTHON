@@ -30,8 +30,10 @@ def addToOrder(strItemID, foodList, priceList):
      global userOrderPrice
      global amtOfFish #Global becuase it is called later on
      global totalCost
+     global customerData
      itemID = int(strItemID)
-     amt = input (colour+" How many "+foodList[itemID] +" would you like [1-7]: "+'\x1b[0m')
+     print("Max fish is 7")
+     amt = input (colour+" How many "+foodList[itemID] +" would you like: "+'\x1b[0m')
      try:
          int(amt) #trys to convert to int
          isInt = True
@@ -42,16 +44,29 @@ def addToOrder(strItemID, foodList, priceList):
           
       error("Not an number, Re running.") #print the error
       fishMenu() #go back to the menu
+     if itemID == 12: #IF ITS chips
+         print(amt)
+         chipsPrice = priceList[itemID]*float(amt) #convert to int times the price by the amt
+         print(chipsPrice)
+         totalCost = totalCost + chipsPrice #add the cost
+         userOrder.append (str(amt+" scoops of chips"))
+         userOrderPrice.append(chipsPrice)
+         fishMenu()#go back 
      for x in range(int(amt)):
        if amtOfFish == 7:
          error("Max amount for "+foodList[itemID] +" has been ordered")
          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
-       else:
+       else: 
         print("Added "+foodList[itemID] +": " + str(x+1)) #this is to show the user that the item actually has been added,  add one to make it count properly bc lists idex starting at 0   
         amtOfFish = amtOfFish + 1   #add to the max
         totalCost = totalCost + priceList[itemID]   #add to the cost
+        fishPrice = priceList[itemID]
+        if customerData[2] == "0":
+           print("Fish Type: "+"Frozen")
+           totalCost = totalCost - 1.05 #take away the discount
+           fishPrice = priceList[itemID] - 1.05
         userOrder.append(foodList[itemID])
-        userOrderPrice.append(priceList[itemID])
+        userOrderPrice.append(fishPrice)
         f = open(tempPath+"\session.txt", "a")
         f.write("Item: " + foodList[itemID] + ", Price: " + str("{:.2f}".format(priceList[x])) + "\n") #add to the doc
         f.close()
@@ -155,6 +170,7 @@ def runAgain():
  global colour
  global userOrder
  global userOrderPrice
+ global amtOfFish
  clear()   
  user = 999
  allowDebug = debugCheck("DEBUG")
@@ -198,8 +214,6 @@ def finish():
   print("Order Type: "+"Pick Up")
  if customerData[2] == "0":
   print("Order Type: "+"Frozen")
-  for i in userOrderPrice: #for everything in the array:
-       totalCost = totalCost - 1.05 #take away the 
  else:
   print("Order Type: "+"Cooked")
  print ("##################################################################################################################")
@@ -424,14 +438,17 @@ def DEBUG():
       DEBUG()
  elif user == "5":
       printAFile("history.txt")
-      time.sleep(1.5)
+      input("press enter to finish \n")
       DEBUG()
  elif user == "6":
       print(str("{:.2f}".format(totalCost)))
+
+      input("press enter to finish \n")
       DEBUG()
  elif user == "7":
        printDualMenu(userOrder, userOrderPrice)
-       debug()
+       input("press enter to finish \n")
+       DEBUG()
  elif user == "8":
       main()
  else:
