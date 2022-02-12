@@ -1,0 +1,170 @@
+
+----------------
+Today's date:2022-02-11
+Customer Name: hh
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Exited, Not finished
+
+----------------
+Today's date:2022-02-11
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder Price: $4.10
+Exited, Not finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-12
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Canceled, Not finished
+
+----------------
+Today's date:2022-02-12
+Canceled, Not finished
+Customer Name: MAX
+Customer Phone Number: 12
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Canceled, Not finished
