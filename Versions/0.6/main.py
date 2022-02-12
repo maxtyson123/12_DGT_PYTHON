@@ -164,10 +164,13 @@ def runInIdle():
  user = 999
  logo()        #Print the logo
  print("NOTE: Running in Idle can make the user experience worse (Console wont clear and ANSI colors dont work.)")
- idle_printSingleMenu = ["Continue","Exit"]
+ idle_printSingleMenu = ["Continue","Run in idle","Exit"]
  printSingleMenu(idle_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
+    print("Running In CMD")
+    os.system('python main.py')
+ elif user == "1":
     print("Running In Idle")
     main()
  elif user == "1":
