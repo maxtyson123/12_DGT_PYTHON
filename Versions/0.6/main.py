@@ -22,7 +22,7 @@ colour = "\x1b[0m" #set the default colour
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file}
+debugMode = ["venv","idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
 def addToOrder(strItemID, foodList, priceList):
@@ -164,7 +164,7 @@ def runInIdle():
  user = 999
  logo()        #Print the logo
  print("NOTE: Running in Idle can make the user experience worse (Console wont clear and ANSI colors dont work.)")
- idle_printSingleMenu = ["Continue","Run in idle","Exit"]
+ idle_printSingleMenu = ["Continue (RECOMENDED)","Run in idle","Exit"]
  printSingleMenu(idle_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
@@ -173,7 +173,7 @@ def runInIdle():
  elif user == "1":
     print("Running In Idle")
     main()
- elif user == "1":
+ elif user == "2":
       print("Exiting")
       if ignoreHistory != "ignoreHistory":
        setHistory()    
@@ -181,7 +181,10 @@ def runInIdle():
        f.write("Ran In Idle, Not finished"+ "\n")
        f.close()
       quit()
-      quit()   
+ else:
+    error("Not AN Option, defaulting to 0")  
+    print("Running In CMD")
+    os.system('python main.py')  
     
 #MAIN FUNCTIONS
 def runAgain():
@@ -430,11 +433,17 @@ def DEBUG():
  global userOrder
  global userOrderPrice
  global totalCost
+ global venvExec
+ global venvPipExec
  clear()   
  user = 999
  userColor = 0
  logo() #Print the logo
  debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Exit"]
+ venvCheck = debugCheck("venv")#Check if virtual
+ if venvCheck == "venv":
+   debug_printSingleMenu.append("Install a python package")#Add venv required options
+   debug_printSingleMenu.append("Execute a python file in a venv")#Not very scalble hope to fix it, but isnt a priority
  printSingleMenu(debug_printSingleMenu) #Print printSingleMenu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -487,8 +496,17 @@ def DEBUG():
        printDualMenu(userOrder, userOrderPrice)
        input("press enter to finish \n")
        DEBUG()
+       
  elif user == "8":
       main()
+ elif venvCheck == "venv" and user == "9":
+      package = input("Package name: ")
+      os.system(venvPipExec +' install '+package)
+      DEBUG()
+ elif venvCheck == "venv" and user == "10":
+      programLoc = input("Program location: ")
+      os.system(venvExec +' '+programLoc)     
+      DEBUG()    
  else:
         error("Not an option")
         main()
@@ -516,9 +534,22 @@ idleDebug = debugCheck("idle")#SAME HERE
 if debug == "data":
  print("Checked for idle and for idle debug tag")
  print("idleCheck: "+str(idleCheck))
-
-
-
+venvCheck = debugCheck("venv")#Check if virtual
+if venvCheck == "venv":
+  venvExec = "F:/Projects/Python/VIRTUAL/Scripts/python.exe"
+  venvPipExec = "F:/Projects/Python/VIRTUAL/Scripts/pip3.exe"
+  botLoc = "F:/PhoneOrders/ChatBotv2"
+  programLoc = "F:/Projects/Python/PROGRAM/12_DGT_PYTHON/Versions/0.6/main.py" #make this automatic later on
+  
+  # if FILE is: #check if a cmd process with venv has started
+    #import keyboard
+   # print("Imported Virtual Packages")
+    #keyboard.press('f11') #makes it fullscreen
+    #clear the file #Clear the file, this makes sure that when closed down a new one will open next run
+    #main() 
+  # else:
+    #write to the file that knows if a process has started
+    #os.system(venvExec +' '+programLoc) #start the process
 if idleCheck == True: #IF it is then run the next check
         if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
               if debug == "data":
