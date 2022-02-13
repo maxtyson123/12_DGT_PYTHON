@@ -316,3 +316,68 @@ Finished
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-13
+Customer Name: MAx
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Exited, Not finished
+
+
+
+
+
+
+----------------
+Today's date:2022-02-13
+Exited, Not finished
+
+

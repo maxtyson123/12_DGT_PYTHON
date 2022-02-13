@@ -25,6 +25,14 @@ userOrderPrice = []
 debugMode = ["venv","idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+def checkFile(FilePath, fileArgs):
+     file = open(FilePath, 'r+')
+     lines = file.readlines()
+     for x in lines:
+         print(x) 
+         if str(x) == "processVenvTrue":
+            return True  
+               
 def addToOrder(strItemID, foodList, priceList):
      printData = debugCheck("data")
      global userOrder
@@ -540,16 +548,25 @@ if venvCheck == "venv":
   venvPipExec = "F:/Projects/Python/VIRTUAL/Scripts/pip3.exe"
   botLoc = "F:/PhoneOrders/ChatBotv2"
   programLoc = "F:/Projects/Python/PROGRAM/12_DGT_PYTHON/Versions/0.6/main.py" #make this automatic later on
-  
-  # if FILE is: #check if a cmd process with venv has started
-    #import keyboard
-   # print("Imported Virtual Packages")
-    #keyboard.press('f11') #makes it fullscreen
-    #clear the file #Clear the file, this makes sure that when closed down a new one will open next run
-    #main() 
-  # else:
-    #write to the file that knows if a process has started
-    #os.system(venvExec +' '+programLoc) #start the process
+  f = open("venv.txt", "a")     
+  f.write("") # Creates a newline for a new order, this also creates the history file if its not there
+  f.close()
+  processStarted = checkFile("venv.txt","processVenvTrue")
+  if processStarted == True: #check if a cmd process with venv has started
+    f = open("venv.txt","r+")
+    f.truncate(0) #reset it
+    f.close()#Clear the file, this makes sure that when closed down a new one will open next run 
+    import keyboard
+    print("Imported Virtual Packages")
+    keyboard.press('f11') #makes it fullscreen
+    main() 
+  elif processStarted != True:
+    f = open("venv.txt", "a")     
+    f.write("processVenvTrue") #write that its been started
+    f.close()
+    os.system(venvExec +' '+programLoc) #start the process
+    print("DONE")
+    input("Press enter to continue with a normal run. \n")
 if idleCheck == True: #IF it is then run the next check
         if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
               if debug == "data":
