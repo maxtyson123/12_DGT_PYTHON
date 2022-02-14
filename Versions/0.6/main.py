@@ -4,6 +4,7 @@
 #DEPENDICES
 import os
 import os.path
+import keyboard
 import sys
 import time
 import random
@@ -164,7 +165,7 @@ def runInIdle():
  user = 999
  logo()        #Print the logo
  print("NOTE: Running in Idle can make the user experience worse (Console wont clear and ANSI colors dont work.)")
- idle_printSingleMenu = ["Continue","Run in idle","Exit"]
+ idle_printSingleMenu = ["Continue (RECOMENDED)","Run in idle","Exit"]
  printSingleMenu(idle_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
@@ -173,7 +174,7 @@ def runInIdle():
  elif user == "1":
     print("Running In Idle")
     main()
- elif user == "1":
+ elif user == "2":
       print("Exiting")
       if ignoreHistory != "ignoreHistory":
        setHistory()    
@@ -181,7 +182,10 @@ def runInIdle():
        f.write("Ran In Idle, Not finished"+ "\n")
        f.close()
       quit()
-      quit()   
+ else:
+    error("Not AN Option, defaulting to 0")  
+    print("Running In CMD")
+    os.system('python main.py')  
     
 #MAIN FUNCTIONS
 def runAgain():
