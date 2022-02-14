@@ -23,7 +23,7 @@ colour = "\x1b[0m" #set the default colour
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file}
+debugMode = ["idle","windows","DEBUG","data","fileData"]#Start up Debug tags. TAGS:(fileData: writes errors to file {idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file}
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
 def checkFish(fish, array):
@@ -137,8 +137,14 @@ def clear():
         command = 'cls'
     os.system(command)
 def error(message):
+    global tempPath 
+    fileData = debugCheck("fileData") 
     print(" ")
     print('\033[31m' + 'Error: ' + message + '\x1b[0m') #Print the message in red
+    f = open(tempPath+"\session.txt","a")
+    if fileData == "fileData":
+     f.write('Error: ' + message +"\n")
+    f.close() 
     time.sleep(3)#Pause for time to read the message
 def printSingleMenu(printThis):
     print ("##################################################################################################################")
