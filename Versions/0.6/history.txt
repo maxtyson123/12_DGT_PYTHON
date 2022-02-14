@@ -301,3 +301,29 @@ Finished
 
 
 
+
+
+----------------
+Today's date:2022-02-14
+Customer Name: 12
+Customer Phone Number: 12
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Finished
+
+
+

@@ -4,7 +4,7 @@
 #DEPENDICES
 import os
 import os.path
-import keyboard
+# use later when i get the usb back OR if i hve to rewrite import keyboard
 import sys
 import time
 import random
@@ -26,6 +26,16 @@ userOrderPrice = []
 debugMode = ["idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file}
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+def checkFish(fish, array):
+    numFish = 0
+    printData = debugCheck("data")
+    for x in array: 
+       if x == fish:
+          numFish = numFish + 1
+          
+    if printData == "data":     
+         print("For "+str(fish)+", Amt ordered is: "+str(numFish))
+    return numFish
 def addToOrder(strItemID, foodList, priceList):
      printData = debugCheck("data")
      global userOrder
@@ -60,6 +70,7 @@ def addToOrder(strItemID, foodList, priceList):
           print("appened to list")
          fishMenu()#go back 
      for x in range(int(amt)):
+       amtOfFish = checkFish(foodList[itemID], userOrder) 
        if amtOfFish == 7:
          error("Max amount for "+foodList[itemID] +" has been ordered")
          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
