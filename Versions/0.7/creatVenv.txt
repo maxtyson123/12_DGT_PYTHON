@@ -1,1 +1,0 @@
-py -m venv F:\Projects\Python\VIRTUAL

@@ -590,16 +590,39 @@ if debug == "data":
  print("Checked for idle and for idle debug tag")
  print("idleCheck: "+str(idleCheck))
 venvCheck = debugCheck("venv")#Check if virtual
-if venvCheck == "venv":
-  currentDir = os.getcwd()   # get where the file is 
-  venvExec = "F:/Projects/Python/VIRTUAL/Scripts/python.exe"
-  venvPipExec = "F:/Projects/Python/VIRTUAL/Scripts/pip3.exe"
-  botLoc = "F:/PhoneOrders/ChatBotv2"
-  print(currentDir)
-  programLoc = currentDir+"\main.py" #make this automatic later on
+if venvCheck == "venv":  
   f = open("venv.txt", "a")     
-  f.write("") # Creates a newline for a new order, this also creates the history file if its not there
+  f.write("") # Creates the file if not there
   f.close()
+  f = open("data.txt", "a")     
+  f.write("") # Creates the file if not there
+  f.close()
+  print("Made files")
+  currentDir = os.getcwd()   # get where the file is
+  venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
+  venvExec =""
+  venvPipExec =""
+  print("checked venv")
+  if venvData == True: #if the user has made the virtual enviroment before
+   venvExec = os.getcwd()+"/VIRTUAL/Scripts/python.exe"
+   venvPipExec = os.getcwd()+"/VIRTUAL/Scripts/pip.exe"
+  elif venvData != True: #if the user has NOT made the virtual enviroment before
+        print("WARNING DO NOT CLOSE THE WINDOW THAT OPENS")
+        time.sleep(1) #give user time to read the warning
+        os.system("py -m venv "+currentDir+"/VIRTUAL/")
+        venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
+        venvPipExec = currentDir+"/VIRTUAL/Scripts/pip.exe"
+        if os.path.isfile(venvExec) == True:          #This way if the cmd is closed then there wont be a false positive with the virtual enviroment
+             f = open("data.txt", "a")
+             f.write("processVenvTrue") #write that its been started
+             if debug == "data":
+               print("set file")
+             f.close()
+             requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
+             for x in requirmenets:
+               os.system(venvPipExec +' install '+x)   
+  print(currentDir)
+  programLoc = currentDir+"\main.py"
   processStarted = checkFile("venv.txt","processVenvTrue")
   if processStarted == True: #check if a cmd process with venv has started
     f = open("venv.txt","r+")
