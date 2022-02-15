@@ -1,7 +1,6 @@
 #FREDDYS FAST FISH BY MAX TYSON FOR YR 12DGT PYTHON
 #RUN ON CMD (NOT IDLE) FOR BEST EXPERIENCE
 
-#VER 0.6                                     
 #DEPENDICES
 import os
 import os.path
@@ -19,19 +18,33 @@ totalCost = 0.00
 tempPath = tempfile.gettempdir() # Get the temp dir
 colour = "\x1b[0m" #set the default colour
 
-
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["venv","idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+debugMode = ["venv","idle","DEBUG"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+def howManyInArray(arrayName):
+     arrayNum = 0
+     for x in arrayName:
+         arrayNum = arrayNum + 1
+     return arrayNum   
+def checkFish(fish, array):
+    numFish = 0 #setup var
+    for x in array: 
+       if x == fish: #if the current item is the same as the fish
+          numFish = numFish + 1 #add 1 to current
+          
+    if printData == "data":     
+         print("For "+str(fish)+", Amt ordered is: "+str(numFish))
+    return numFish #return the amount of fish
+
 def checkFile(FilePath, fileArgs):
-     file = open(FilePath, 'r+')
-     lines = file.readlines()
+     file = open(FilePath, 'r+') #open the file
+     lines = file.readlines() #read the lines
      for x in lines:
-         print(x) 
-         if str(x) == "processVenvTrue":
+         print(x)  #print lines (for debuging)
+         if str(x) == str(fileArgs): #if it is the same return true
             return True  
                
 def addToOrder(strItemID, foodList, priceList):
@@ -42,7 +55,7 @@ def addToOrder(strItemID, foodList, priceList):
      global totalCost
      global customerData 
      itemID = int(strItemID)#convert to into int
-     print("Max fish is 7") # alert the user of the max
+     
      amt = input (colour+" How many "+foodList[itemID] +" would you like: "+'\x1b[0m') #ask how many of the item the user would like
      try:
          int(amt) #trys to convert to int
@@ -67,7 +80,9 @@ def addToOrder(strItemID, foodList, priceList):
          if printData == "data":
           print("appened to list")
          fishMenu()#go back 
+     print(" The most fish you can order is 7.") # alert the user of the max     
      for x in range(int(amt)):
+       amtOfFish = checkFish(foodList[itemID], userOrder)    
        if amtOfFish == 7:
          error("Max amount for "+foodList[itemID] +" has been ordered")
          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
@@ -125,9 +140,10 @@ def in_idle():
 
 def debugCheck(debugID):
      global debugMode
-     for i in debugMode: #for everything in the array:
-        if(i == debugID) : #check if the debugID is in the array
+     for i in debugMode: #for everything in the array: 
+        if(i == debugID) : #check if the debugID is in the array  
             return(i) #return the value
+    
 def clear():
     command = 'clear'
     if os.name in ('nt', 'dos'): #if in windows
@@ -169,6 +185,8 @@ def logo():
                                                                                                                  
 
     """ + '\x1b[0m')#sets it back to white
+
+#MAIN FUNCTIONS
 def runInIdle():
  user = 999
  logo()        #Print the logo
@@ -179,6 +197,8 @@ def runInIdle():
  if user == "0":
     print("Running In CMD")
     os.system('python main.py')
+    print("Session finished")
+    quit() #makes sure that when the user closes the cmd window then idle window will close aswell
  elif user == "1":
     print("Running In Idle")
     main()
@@ -191,17 +211,19 @@ def runInIdle():
        f.close()
       quit()
  else:
-    error("Not AN Option, defaulting to 0")  
+    error("Not AN Option, defaulting to option 0")  
     print("Running In CMD")
-    os.system('python main.py')  
-    
-#MAIN FUNCTIONS
+    os.system('python main.py')
+    print("Session finished")
+    quit()
+     
 def runAgain():
  printData = debugCheck("data")    
  global colour
  global userOrder
  global userOrderPrice
  global amtOfFish
+ global totalCost
  clear()   
  user = 999
  allowDebug = debugCheck("DEBUG")
@@ -277,7 +299,7 @@ def finish():
  f.close()
  if printData == "data":
       print("Write to doc")
- input("Press enter to continue /n")
+ input("Press enter to continue \n")
  runAgain()
 def fishMenu():
  global colour
@@ -394,7 +416,10 @@ def main():
  user = 999
  allowDebug = debugCheck("DEBUG")
  logo() #Print the logo
- main_printSingleMenu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current","Exit"]
+ main_printSingleMenu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current"]
+ main_printSingleMenu.append("Exit")
+ exit1 = howManyInArray(main_printSingleMenu)  #get its place for the input
+ exit1 = exit1 - 1 #take away 1 becuase the array starts at 0 but the counter starts at 1
  printSingleMenu(main_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
@@ -419,8 +444,8 @@ def main():
       amtOfFish = 0 #reset the fish
       totalCost = 0.00 # zero out the price
       main()
- elif user == "4":
-      print("4")
+ elif user == str(exit1):
+      print(exit1)
       if ignoreHistory != "ignoreHistory":
        setHistory()    
        f = open("history.txt", "a")     
@@ -447,12 +472,22 @@ def DEBUG():
  clear()   
  user = 999
  userColor = 0
+ 
  logo() #Print the logo
- debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Exit"]
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir"]
  venvCheck = debugCheck("venv")#Check if virtual
+   
  if venvCheck == "venv":
+  
    debug_printSingleMenu.append("Install a python package")#Add venv required options
+   venvOp1 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   venvOp1 = venvOp1 - 1
    debug_printSingleMenu.append("Execute a python file in a venv")#Not very scalble hope to fix it, but isnt a priority
+   venvOp2 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   venvOp2 = venvOp2 - 1
+ debug_printSingleMenu.append("Exit") #Add exit so its always last
+ exit1 = howManyInArray(debug_printSingleMenu)  #get its place for the input
+ exit1 = exit1 - 1 
  printSingleMenu(debug_printSingleMenu) #Print printSingleMenu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -505,17 +540,28 @@ def DEBUG():
        printDualMenu(userOrder, userOrderPrice)
        input("press enter to finish \n")
        DEBUG()
-       
- elif user == "8":
-      main()
- elif venvCheck == "venv" and user == "9":
+ elif user == "8":   
+     tag = input("Tag name:")
+     debugMode.append(tag) 
+     DEBUG()
+ elif user == "9":   
+     printSingleMenu(debugMode)
+     input("press enter to finish \n")
+     DEBUG()  
+ elif user == "10":   
+     print(os.getcwd())
+     time.sleep(1.5)
+     DEBUG()      
+ elif venvCheck == "venv" and user == str(venvOp1):
       package = input("Package name: ")
       os.system(venvPipExec +' install '+package)
       DEBUG()
- elif venvCheck == "venv" and user == "10":
+ elif venvCheck == "venv" and user == str(venvOp2):
       programLoc = input("Program location: ")
       os.system(venvExec +' '+programLoc)     
-      DEBUG()    
+      DEBUG()
+ elif user == str(exit1):
+      main()     
  else:
         error("Not an option")
         main()
@@ -545,10 +591,12 @@ if debug == "data":
  print("idleCheck: "+str(idleCheck))
 venvCheck = debugCheck("venv")#Check if virtual
 if venvCheck == "venv":
+  currentDir = os.getcwd()   # get where the file is 
   venvExec = "F:/Projects/Python/VIRTUAL/Scripts/python.exe"
   venvPipExec = "F:/Projects/Python/VIRTUAL/Scripts/pip3.exe"
   botLoc = "F:/PhoneOrders/ChatBotv2"
-  programLoc = "F:/Projects/Python/PROGRAM/12_DGT_PYTHON/Versions/0.6/main.py" #make this automatic later on
+  print(currentDir)
+  programLoc = currentDir+"\main.py" #make this automatic later on
   f = open("venv.txt", "a")     
   f.write("") # Creates a newline for a new order, this also creates the history file if its not there
   f.close()
@@ -556,22 +604,29 @@ if venvCheck == "venv":
   if processStarted == True: #check if a cmd process with venv has started
     f = open("venv.txt","r+")
     f.truncate(0) #reset it
+    if debug == "data":
+     print("Reset file")
     f.close()#Clear the file, this makes sure that when closed down a new one will open next run 
     import keyboard
     print("Imported Virtual Packages")
     keyboard.press('f11') #makes it fullscreen
     main() 
   elif processStarted != True:
-    f = open("venv.txt", "a")     
+    f = open("venv.txt", "a")
+    
     f.write("processVenvTrue") #write that its been started
+    if debug == "data":
+     print("set file")
     f.close()
-    os.system(venvExec +' '+programLoc) #start the process
-    print("DONE")
-    input("Press enter to continue with a normal run. \n")
+    if debug == "data":
+     print("started process")
+    os.system(venvExec +' '+programLoc) #start the process    
+    print("FINISHED IN VIRTUAL ENV")
+    quit()
 if idleCheck == True: #IF it is then run the next check
         if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
               if debug == "data":
-                print("idle debug tag set, dont show warning printSingleMenu") 
+                print("idle debug tag set, dont show warning menu") 
               error("Runnning in idle with debug mode")
               main()
         else: #else show the idle printSingleMenu
