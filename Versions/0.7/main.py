@@ -18,17 +18,17 @@ totalCost = 0.00
 tempPath = tempfile.gettempdir() # Get the temp dir
 colour = "\x1b[0m" #set the default colour
 
-
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["venv","idle","windows","DEBUG"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+debugMode = ["venv","idle","DEBUG"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
 def howManyInArray(arrayName):
      arrayNum = 0
      for x in arrayName:
-         arrayNum = arrayNum + 1 
+         arrayNum = arrayNum + 1
+     return arrayNum   
 def checkFish(fish, array):
     numFish = 0 #setup var
     for x in array: 
@@ -185,6 +185,8 @@ def logo():
                                                                                                                  
 
     """ + '\x1b[0m')#sets it back to white
+
+#MAIN FUNCTIONS
 def runInIdle():
  user = 999
  logo()        #Print the logo
@@ -195,6 +197,8 @@ def runInIdle():
  if user == "0":
     print("Running In CMD")
     os.system('python main.py')
+    print("Session finished")
+    quit() #makes sure that when the user closes the cmd window then idle window will close aswell
  elif user == "1":
     print("Running In Idle")
     main()
@@ -207,11 +211,12 @@ def runInIdle():
        f.close()
       quit()
  else:
-    error("Not AN Option, defaulting to 0")  
+    error("Not AN Option, defaulting to option 0")  
     print("Running In CMD")
-    os.system('python main.py')  
-    
-#MAIN FUNCTIONS
+    os.system('python main.py')
+    print("Session finished")
+    quit()
+     
 def runAgain():
  printData = debugCheck("data")    
  global colour
@@ -411,7 +416,10 @@ def main():
  user = 999
  allowDebug = debugCheck("DEBUG")
  logo() #Print the logo
- main_printSingleMenu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current","Exit"]
+ main_printSingleMenu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current"]
+ main_printSingleMenu.append("Exit")
+ exit1 = howManyInArray(main_printSingleMenu)  #get its place for the input
+ exit1 = exit1 - 1 #take away 1 becuase the array starts at 0 but the counter starts at 1
  printSingleMenu(main_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
@@ -436,8 +444,8 @@ def main():
       amtOfFish = 0 #reset the fish
       totalCost = 0.00 # zero out the price
       main()
- elif user == "4":
-      print("4")
+ elif user == str(exit1):
+      print(exit1)
       if ignoreHistory != "ignoreHistory":
        setHistory()    
        f = open("history.txt", "a")     
@@ -466,13 +474,20 @@ def DEBUG():
  userColor = 0
  
  logo() #Print the logo
- debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir","Exit"]
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir"]
  venvCheck = debugCheck("venv")#Check if virtual
    
  if venvCheck == "venv":
-   arrayNum = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later  
+  
    debug_printSingleMenu.append("Install a python package")#Add venv required options
+   venvOp1 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   venvOp1 = venvOp1 - 1
    debug_printSingleMenu.append("Execute a python file in a venv")#Not very scalble hope to fix it, but isnt a priority
+   venvOp2 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   venvOp2 = venvOp2 - 1
+ debug_printSingleMenu.append("Exit") #Add exit so its always last
+ exit1 = howManyInArray(debug_printSingleMenu)  #get its place for the input
+ exit1 = exit1 - 1 
  printSingleMenu(debug_printSingleMenu) #Print printSingleMenu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -537,16 +552,16 @@ def DEBUG():
      print(os.getcwd())
      time.sleep(1.5)
      DEBUG()      
- elif user == "11":
-      main()
- elif venvCheck == "venv" and user == "9":
+ elif venvCheck == "venv" and user == str(venvOp1):
       package = input("Package name: ")
       os.system(venvPipExec +' install '+package)
       DEBUG()
- elif venvCheck == "venv" and user == "10":
+ elif venvCheck == "venv" and user == str(venvOp2):
       programLoc = input("Program location: ")
       os.system(venvExec +' '+programLoc)     
-      DEBUG()    
+      DEBUG()
+ elif user == str(exit1):
+      main()     
  else:
         error("Not an option")
         main()
