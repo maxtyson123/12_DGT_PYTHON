@@ -21,7 +21,7 @@ colour = "\x1b[0m" #set the default colour
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip), (chatBot: this was a tutorial i followed to learn some more becuase i was bored and i ended up devloping a python chatbot for freddys fast fish, to use this add this tag and clone the files from the branc chatbot and folder ChatBotV2)
+debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
 def howManyInArray(arrayName):
@@ -51,7 +51,6 @@ def addToOrder(strItemID, foodList, priceList):
      printData = debugCheck("data")
      global userOrder
      global userOrderPrice
-     global amtOfFish #Global becuase it is called later on
      global totalCost
      global customerData 
      itemID = int(strItemID)#convert to into int
@@ -446,6 +445,7 @@ def main():
       main()
  elif user == str(exit1):
       print(exit1)
+      print(user)
       if ignoreHistory != "ignoreHistory":
        setHistory()    
        f = open("history.txt", "a")     
@@ -469,6 +469,7 @@ def DEBUG():
  global totalCost
  global venvExec
  global venvPipExec
+ global chatBotLoc
  clear()   
  user = 999
  userColor = 0
@@ -476,15 +477,29 @@ def DEBUG():
  logo() #Print the logo
  debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir"]
  venvCheck = debugCheck("venv")#Check if virtual
-   
  if venvCheck == "venv":
   
    debug_printSingleMenu.append("Install a python package")#Add venv required options
    venvOp1 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
    venvOp1 = venvOp1 - 1
-   debug_printSingleMenu.append("Execute a python file in a venv")#Not very scalble hope to fix it, but isnt a priority
+   debug_printSingleMenu.append("Execute a python file in a venv")
    venvOp2 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
    venvOp2 = venvOp2 - 1
+ chatBotCheck = debugCheck("chatBot")  
+ if chatBotCheck == "chatBot":
+  
+   debug_printSingleMenu.append("Run the bot")#Add venv required options
+   chatBotOp1 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   chatBotOp1 = chatBotOp1 - 1
+   debug_printSingleMenu.append("Train the bot")
+   chatBotOp2 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   chatBotOp2 = chatBotOp2 - 1
+   debug_printSingleMenu.append("Add bot data")
+   chatBotOp3 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   chatBotOp3 = chatBotOp2 - 1
+   debug_printSingleMenu.append("Install required packages")
+   chatBotOp3 = howManyInArray(debug_printSingleMenu)  #check how many in array, this is used later
+   chatBotOp3 = chatBotOp2 - 1  
  debug_printSingleMenu.append("Exit") #Add exit so its always last
  exit1 = howManyInArray(debug_printSingleMenu)  #get its place for the input
  exit1 = exit1 - 1 
@@ -560,6 +575,22 @@ def DEBUG():
       programLoc = input("Program location: ")
       os.system(venvExec +' '+programLoc)     
       DEBUG()
+ elif chatBotCheck == "chatBot" ad user == str(chatBotOp1):
+      os.system(venvExec +' '+chatBotLoc+"\chatgui.py") 
+      DEBUG()
+ elif chatBotCheck == "chatBot" ad user == str(chatBotOp2):
+      os.system(venvExec +' '+chatBotLoc+"\chatTrain.py") 
+      DEBUG()
+ elif chatBotCheck == "chatBot" ad user == str(chatBotOp3):
+      print("Tmmr")
+      DEBUG()
+ elif chatBotCheck == "chatBot" ad user == str(chatBotOp4):
+      print("DONT CLOSE ANY WINDOWS")
+      time.sleep(1)
+      requirmenets = ["numPy","Flask"] #Yes i know that there is only one in the list but that is to make this script more scalable.
+      for x in requirmenets:
+           os.system(venvPipExec +' install '+x)   
+      DEBUG()     
  elif user == str(exit1):
       main()     
  else:
@@ -600,10 +631,13 @@ if venvCheck == "venv":
   print("Made files")
   currentDir = os.getcwd()   # get where the file is
   venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
+  print(venvData)
+  time.sleep(1)
   venvExec =""
   venvPipExec =""
   print("checked venv")
   if venvData == True: #if the user has made the virtual enviroment before
+   print("TRUE")
    venvExec = os.getcwd()+"/VIRTUAL/Scripts/python.exe"
    venvPipExec = os.getcwd()+"/VIRTUAL/Scripts/pip.exe"
   elif venvData != True: #if the user has NOT made the virtual enviroment before
@@ -612,15 +646,14 @@ if venvCheck == "venv":
         os.system("py -m venv "+currentDir+"/VIRTUAL/")
         venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
         venvPipExec = currentDir+"/VIRTUAL/Scripts/pip.exe"
-        if os.path.isfile(venvExec) == True:          #This way if the cmd is closed then there wont be a false positive with the virtual enviroment
-             f = open("data.txt", "a")
-             f.write("processVenvTrue") #write that its been started
-             if debug == "data":
-               print("set file")
-             f.close()
-             requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
-             for x in requirmenets:
-               os.system(venvPipExec +' install '+x)   
+        f = open("data.txt", "a")
+        f.write("venvMadeTrue") #write that its been started
+        if debug == "data":
+             print("set file")
+        f.close()
+        requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
+        for x in requirmenets:
+           os.system(venvPipExec +' install '+x)   
   print(currentDir)
   programLoc = currentDir+"\main.py"
   processStarted = checkFile("venv.txt","processVenvTrue")
@@ -633,7 +666,6 @@ if venvCheck == "venv":
     import keyboard
     print("Imported Virtual Packages")
     keyboard.press('f11') #makes it fullscreen
-    main() 
   elif processStarted != True:
     f = open("venv.txt", "a")
     
@@ -659,4 +691,5 @@ if idleCheck == True: #IF it is then run the next check
 else:
      if debug == "data":
       print("idle check returned false, running as normal")
+     time.sleep(12) 
      main()   
