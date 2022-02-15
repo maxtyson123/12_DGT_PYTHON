@@ -4,6 +4,7 @@
 #DEPENDICES
 import os
 import os.path
+# use later when i get the usb back OR if i hve to rewrite import keyboard
 import sys
 import time
 import random
@@ -22,17 +23,19 @@ colour = "\x1b[0m" #set the default colour
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["venv","idle","windows","DEBUG","data"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+debugMode = ["idle","windows","DEBUG","data","fileData"]#Start up Debug tags. TAGS:(fileData: writes errors to file {idle: Allows debugging on idle} {windows: Sets the platform to be windows} {DEBUG: Turns on debuging mode and allows acess to the debug printSingleMenu} {Color: Tells the randomizer that color has been set in the debug printSingleMenu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file}
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
-def checkFile(FilePath, fileArgs):
-     file = open(FilePath, 'r+')
-     lines = file.readlines()
-     for x in lines:
-         print(x) 
-         if str(x) == "processVenvTrue":
-            return True  
-               
+def checkFish(fish, array):
+    numFish = 0
+    printData = debugCheck("data")
+    for x in array: 
+       if x == fish:
+          numFish = numFish + 1
+          
+    if printData == "data":     
+         print("For "+str(fish)+", Amt ordered is: "+str(numFish))
+    return numFish
 def addToOrder(strItemID, foodList, priceList):
      printData = debugCheck("data")
      global userOrder
@@ -67,6 +70,7 @@ def addToOrder(strItemID, foodList, priceList):
           print("appened to list")
          fishMenu()#go back 
      for x in range(int(amt)):
+       amtOfFish = checkFish(foodList[itemID], userOrder) 
        if amtOfFish == 7:
          error("Max amount for "+foodList[itemID] +" has been ordered")
          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
@@ -133,8 +137,14 @@ def clear():
         command = 'cls'
     os.system(command)
 def error(message):
+    global tempPath 
+    fileData = debugCheck("fileData") 
     print(" ")
     print('\033[31m' + 'Error: ' + message + '\x1b[0m') #Print the message in red
+    f = open(tempPath+"\session.txt","a")
+    if fileData == "fileData":
+     f.write('Error: ' + message +"\n")
+    f.close() 
     time.sleep(3)#Pause for time to read the message
 def printSingleMenu(printThis):
     print ("##################################################################################################################")
@@ -441,17 +451,11 @@ def DEBUG():
  global userOrder
  global userOrderPrice
  global totalCost
- global venvExec
- global venvPipExec
  clear()   
  user = 999
  userColor = 0
  logo() #Print the logo
  debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Exit"]
- venvCheck = debugCheck("venv")#Check if virtual
- if venvCheck == "venv":
-   debug_printSingleMenu.append("Install a python package")#Add venv required options
-   debug_printSingleMenu.append("Execute a python file in a venv")#Not very scalble hope to fix it, but isnt a priority
  printSingleMenu(debug_printSingleMenu) #Print printSingleMenu
  user = input ("Please make a choice via number and then press enter to confirm: ")
  if user == "0":
@@ -504,17 +508,8 @@ def DEBUG():
        printDualMenu(userOrder, userOrderPrice)
        input("press enter to finish \n")
        DEBUG()
-       
  elif user == "8":
       main()
- elif venvCheck == "venv" and user == "9":
-      package = input("Package name: ")
-      os.system(venvPipExec +' install '+package)
-      DEBUG()
- elif venvCheck == "venv" and user == "10":
-      programLoc = input("Program location: ")
-      os.system(venvExec +' '+programLoc)     
-      DEBUG()    
  else:
         error("Not an option")
         main()
@@ -542,31 +537,9 @@ idleDebug = debugCheck("idle")#SAME HERE
 if debug == "data":
  print("Checked for idle and for idle debug tag")
  print("idleCheck: "+str(idleCheck))
-venvCheck = debugCheck("venv")#Check if virtual
-if venvCheck == "venv":
-  venvExec = "F:/Projects/Python/VIRTUAL/Scripts/python.exe"
-  venvPipExec = "F:/Projects/Python/VIRTUAL/Scripts/pip3.exe"
-  botLoc = "F:/PhoneOrders/ChatBotv2"
-  programLoc = "F:/Projects/Python/PROGRAM/12_DGT_PYTHON/Versions/0.6/main.py" #make this automatic later on
-  f = open("venv.txt", "a")     
-  f.write("") # Creates a newline for a new order, this also creates the history file if its not there
-  f.close()
-  processStarted = checkFile("venv.txt","processVenvTrue")
-  if processStarted == True: #check if a cmd process with venv has started
-    f = open("venv.txt","r+")
-    f.truncate(0) #reset it
-    f.close()#Clear the file, this makes sure that when closed down a new one will open next run 
-    import keyboard
-    print("Imported Virtual Packages")
-    keyboard.press('f11') #makes it fullscreen
-    main() 
-  elif processStarted != True:
-    f = open("venv.txt", "a")     
-    f.write("processVenvTrue") #write that its been started
-    f.close()
-    os.system(venvExec +' '+programLoc) #start the process
-    print("DONE")
-    input("Press enter to continue with a normal run. \n")
+
+
+
 if idleCheck == True: #IF it is then run the next check
         if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
               if debug == "data":
