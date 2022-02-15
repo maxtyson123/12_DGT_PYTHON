@@ -21,7 +21,7 @@ colour = "\x1b[0m" #set the default colour
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["venv","idle","DEBUG"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip), (chatBot: this was a tutorial i followed to learn some more becuase i was bored and i ended up devloping a python chatbot for freddys fast fish, to use this add this tag and clone the files from the branc chatbot and folder ChatBotV2)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
 def howManyInArray(arrayName):
