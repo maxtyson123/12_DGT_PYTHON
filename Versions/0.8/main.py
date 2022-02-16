@@ -689,7 +689,7 @@ def DEBUG():
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp1):
       os.system(venvExec +' '+chatBotLoc+"/chatgui.py") 
-      time.sleep(123)  
+      time.sleep(1)  
       DEBUG()
       
  elif chatBotCheck == "chatBot" and user == str(chatBotOp2):
