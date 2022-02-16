@@ -4,14 +4,21 @@ from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
-
+import os
+path = os.getcwd()+"/../ChatBot" #the reason we have to add this is becuase when the script gets the wroikf directory it getts weher it was excuted from which was the main dir of main.py
+print(path)
+print(" ")
+print(" ")
+print(" ")
+print(" ")
+print(" ")
 from keras.models import load_model
-model = load_model('chatbot_model.h5')
+model = load_model(path+'\chatbot_model.h5')
 import json
 import random
-intents = json.loads(open('intents.json').read())
-words = pickle.load(open('words.pkl','rb'))
-classes = pickle.load(open('classes.pkl','rb'))
+intents = json.loads(open(path+'\intents.json').read())
+words = pickle.load(open(path+'\words.pkl','rb'))
+classes = pickle.load(open(path+'\classes.pkl','rb'))
 
 
 def clean_up_sentence(sentence):

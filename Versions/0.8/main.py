@@ -20,6 +20,7 @@ colour = "\x1b[0m" #set the default colour
 currentDir = os.getcwd()   # get where the file is 
 venvExec =""
 venvPipExec =""
+chatBotLoc =""
 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
@@ -29,7 +30,8 @@ customerData = [] #Format: ["name: the persons name","phone number","frozen(0) o
 #FUNCTIONS
 def venv():
  global venvExec
- global venvPipExec  
+ global venvPipExec
+ global chatBotLoc
  venvCheck = debugCheck("venv")#Check if virtual    
  if venvCheck == "venv":  
   f = open("venv.txt", "a")     
@@ -41,15 +43,21 @@ def venv():
   print("Made files")
   
   venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
-  print(venvData)
+  print("venvData"+str(venvData))
   time.sleep(1)
  
   print("checked venv made doc") 
   if venvData == True: #if the user has made the virtual enviroment before
    print("VENV DATA TRUE")
-   venvExec = os.getcwd()+"\VIRTUAL\Scripts\python.exe"
-   venvPipExec = os.getcwd()+"\VIRTUAL\Scripts\pip.exe"
-   chatBotLoc = os.getcwd()+"..\ChatBot"
+   setCustomData = checkFile("data.txt","CustomEnviroment")
+   if setCustomData == True:
+    path = customData("data.txt","CustomEnviroment")
+    venvExec = path+"\Scripts\python.exe"
+    venvPipExec = path+"\Scripts\pip.exe"
+   else:  
+       venvExec = os.getcwd()+"\VIRTUAL\Scripts\python.exe"
+       venvPipExec = os.getcwd()+"\VIRTUAL\Scripts\pip.exe"
+   chatBotLoc = os.getcwd()+"/../ChatBot"
    pythonExists = os.path.isfile(venvExec) #Checks if python exists
    pipExists = os.path.isfile(venvPipExec) #Checks if pip exists
    if pipExists != True:
@@ -75,7 +83,7 @@ def venv():
         venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
         venvPipExec = currentDir+"/VIRTUAL/Scripts/pip.exe"
         f = open("data.txt", "a")
-        f.write("venvMadeTrue") #write that its been started
+        f.write("\nvenvMadeTrue") #write that its been started
         if debug == "data":
              print("set file")
         f.close()
@@ -109,7 +117,21 @@ def venv():
     os.system(venvExec +' '+programLoc) #start the process    
     print("FINISHED IN VIRTUAL ENV")
     quit()
-  
+def customData(FilePath, fileArgs):
+     file = open(FilePath, 'r+') #open the file
+     current = -1 #needs to start at negative one because the file indexing starts at zero
+     lines = file.readlines() #read the lines
+     for x in lines:
+         current += 1
+         print(x+"line: "+"current")  #print lines (for debuging)
+         
+         if str(x) == str(fileArgs): #if it is the same return true
+            current += 1 #add one to get the data below
+            lineData = file[current] 
+            print(lineData)
+            return lineData  
+               
+     return arrayNum   
 def howManyInArray(arrayName):
      arrayNum = 0
      for x in arrayName:
@@ -666,10 +688,13 @@ def DEBUG():
       os.system(venvExec +' '+programLoc)     
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp1):
-      os.system(venvExec +' '+chatBotLoc+"\chatgui.py") 
+      os.system(venvExec +' '+chatBotLoc+"/chatgui.py") 
+      time.sleep(123)  
       DEBUG()
+      
  elif chatBotCheck == "chatBot" and user == str(chatBotOp2):
-      os.system(venvExec +' '+chatBotLoc+"\train_chatbot.py") 
+      os.system(venvExec +' '+chatBotLoc+"/train_chatbot.py")
+      time.sleep(12)
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp3):
       print("Tmmr")
