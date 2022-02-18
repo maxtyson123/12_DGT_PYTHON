@@ -6,16 +6,26 @@ import pickle
 import numpy as np
 import os
 path = os.getcwd()+"/../ChatBot" #the reason we have to add this is becuase when the script gets the wroikf directory it getts weher it was excuted from which was the main dir of main.py
+print(path)
+import sys
+mainPyLoc = os.getcwd()
+print("SYS")
+sys.path.insert(0, mainPyLoc)
+print("IMPORYT")
+import main as script
 print("PLEASE TRAIN BEFORE FIRST RUN")
 print(" ")
 print(" ")
 print(" ")
 print(" ")
 print("If you encounter nltk errors, run training script ")
+print("main.main()")
+script.logo()
 from keras.models import load_model
 model = load_model(path+'\chatbot_model.h5')
 import json
 import random
+
 intents = json.loads(open(path+'\intents.json').read())
 words = pickle.load(open(path+'\words.pkl','rb'))
 classes = pickle.load(open(path+'\classes.pkl','rb'))
@@ -23,7 +33,7 @@ chipsResponse = False
 amtOfFish = 0
 fishType = 0
 firstFishResponse = True
-SecondFishResponse = False 
+SecondFishResponse = False
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
