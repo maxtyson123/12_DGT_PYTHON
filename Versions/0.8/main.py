@@ -25,98 +25,10 @@ chatBotLoc =""
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
 userOrder = []
 userOrderPrice = []
-debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+debugMode = ["idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
-def venv():
- global venvExec
- global venvPipExec
- global chatBotLoc
- venvCheck = debugCheck("venv")#Check if virtual    
- if venvCheck == "venv":  
-  f = open("venv.txt", "a")     
-  f.write("") # Creates the file if not there
-  f.close()
-  f = open("data.txt", "a")     
-  f.write("") # Creates the file if not there
-  f.close()
-  print("Made files")
-  
-  venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
-  print("venvData"+str(venvData))
-  time.sleep(1)
- 
-  print("checked venv made doc") 
-  if venvData == True: #if the user has made the virtual enviroment before
-   print("VENV DATA TRUE")
-   setCustomData = checkFile("data.txt","CustomEnviroment")
-   if setCustomData == True:
-    path = customData("data.txt","CustomEnviroment")
-    venvExec = path+"\Scripts\python.exe"
-    venvPipExec = path+"\Scripts\pip.exe"
-   else:  
-       venvExec = os.getcwd()+"\VIRTUAL\Scripts\python.exe"
-       venvPipExec = os.getcwd()+"\VIRTUAL\Scripts\pip.exe"
-   chatBotLoc = os.getcwd()+"/../ChatBot"
-   pythonExists = os.path.isfile(venvExec) #Checks if python exists
-   pipExists = os.path.isfile(venvPipExec) #Checks if pip exists
-   if pipExists != True:
-    f = open("data.txt","r+")
-    f.truncate(0) #RESETS IT
-    if debug == "data":
-     print("Python doesnt exist, reset the venv made document")
-    f.close()
-   if pythonExists != True:
-    f = open("data.txt","r+")
-    f.truncate(0) #RESETS IT
-    if debug == "data":
-     print("Python doesnt exist, reset the venv made document")
-    f.close() 
-  elif venvData != True: #if the user has NOT made the virtual enviroment before
-        if idleCheck == True:
-         print("WARNING: DO NOT CLOSE THE WINDOW THAT OPENS") #if its in idle this will be shown.
-         time.sleep(1) #give user time to read the warning
-        else:
-            print("WARNING: DO NOT CLOSE THE CURRENT WINDOW")  
-        print("Installing Packages") 
-        os.system("py -m venv "+currentDir+"/VIRTUAL/")
-        venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
-        venvPipExec = currentDir+"/VIRTUAL/Scripts/pip.exe"
-        f = open("data.txt", "a")
-        f.write("\nvenvMadeTrue") #write that its been started
-        if debug == "data":
-             print("set file")
-        f.close()
-        requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
-        for x in requirmenets:
-           os.system(venvPipExec +' install '+x)   
-  if debug == "data":
-   print(currentDir)
-   print("venvExec: "+venvExec)
-   print("venvPipExec: "+venvPipExec)
-  programLoc = currentDir+"\main.py"
-  processStarted = checkFile("venv.txt","processVenvTrue")
-  if processStarted == True: #check if a cmd process with venv has started
-    f = open("venv.txt","r+")
-    f.truncate(0) #reset it
-    if debug == "data":
-     print("Reset file")
-    f.close()#Clear the file, this makes sure that when closed down a new one will open next run 
-    import keyboard
-    print("Imported Virtual Packages")
-    keyboard.press('f11') #makes it fullscreen
-  elif processStarted != True:
-    f = open("venv.txt", "a")
-    
-    f.write("processVenvTrue") #write that its been started
-    if debug == "data":
-     print("set file")
-    f.close()
-    if debug == "data":
-     print("started process")
-    os.system(venvExec +' '+programLoc) #start the process    
-    print("FINISHED IN VIRTUAL ENV")
-    quit()
+
 def customData(FilePath, fileArgs):
      file = open(FilePath, 'r+') #open the file
      current = -1 #needs to start at negative one because the file indexing starts at zero
@@ -298,6 +210,95 @@ def logo():
     """ + '\x1b[0m')#sets it back to white
 
 #MAIN FUNCTIONS
+def venv():
+ global venvExec
+ global venvPipExec
+ global chatBotLoc
+ venvCheck = debugCheck("venv")#Check if virtual    
+ if venvCheck == "venv":  
+  f = open("venv.txt", "a")     
+  f.write("") # Creates the file if not there
+  f.close()
+  f = open("data.txt", "a")     
+  f.write("") # Creates the file if not there
+  f.close()
+  print("Made files")
+  
+  venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
+  print("venvData"+str(venvData))
+  time.sleep(1)
+ 
+  print("checked venv made doc") 
+  if venvData == True: #if the user has made the virtual enviroment before
+   print("VENV DATA TRUE")
+   setCustomData = checkFile("data.txt","CustomEnviroment")
+   if setCustomData == True:
+    path = customData("data.txt","CustomEnviroment")
+    venvExec = path+"\Scripts\python.exe"
+    venvPipExec = path+"\Scripts\pip.exe"
+   else:  
+       venvExec = os.getcwd()+"\VIRTUAL\Scripts\python.exe"
+       venvPipExec = os.getcwd()+"\VIRTUAL\Scripts\pip.exe"
+   chatBotLoc = os.getcwd()+"/../ChatBot"
+   pythonExists = os.path.isfile(venvExec) #Checks if python exists
+   pipExists = os.path.isfile(venvPipExec) #Checks if pip exists
+   if pipExists != True:
+    f = open("data.txt","r+")
+    f.truncate(0) #RESETS IT
+    if debug == "data":
+     print("Python doesnt exist, reset the venv made document")
+    f.close()
+   if pythonExists != True:
+    f = open("data.txt","r+")
+    f.truncate(0) #RESETS IT
+    if debug == "data":
+     print("Python doesnt exist, reset the venv made document")
+    f.close() 
+  elif venvData != True: #if the user has NOT made the virtual enviroment before
+        if idleCheck == True:
+         print("WARNING: DO NOT CLOSE THE WINDOW THAT OPENS") #if its in idle this will be shown.
+         time.sleep(1) #give user time to read the warning
+        else:
+            print("WARNING: DO NOT CLOSE THE CURRENT WINDOW")  
+        print("Installing Packages") 
+        os.system("py -m venv "+currentDir+"/VIRTUAL/")
+        venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
+        venvPipExec = currentDir+"/VIRTUAL/Scripts/pip.exe"
+        f = open("data.txt", "a")
+        f.write("\nvenvMadeTrue") #write that its been started
+        if debug == "data":
+             print("set file")
+        f.close()
+        requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
+        for x in requirmenets:
+           os.system(venvPipExec +' install '+x)   
+  if debug == "data":
+   print(currentDir)
+   print("venvExec: "+venvExec)
+   print("venvPipExec: "+venvPipExec)
+  programLoc = currentDir+"\main.py"
+  processStarted = checkFile("venv.txt","processVenvTrue")
+  if processStarted == True: #check if a cmd process with venv has started
+    f = open("venv.txt","r+")
+    f.truncate(0) #reset it
+    if debug == "data":
+     print("Reset file")
+    f.close()#Clear the file, this makes sure that when closed down a new one will open next run 
+    import keyboard
+    print("Imported Virtual Packages")
+    keyboard.press('f11') #makes it fullscreen
+  elif processStarted != True:
+    f = open("venv.txt", "a")
+    
+    f.write("processVenvTrue") #write that its been started
+    if debug == "data":
+     print("set file")
+    f.close()
+    if debug == "data":
+     print("started process")
+    os.system(venvExec +' '+programLoc) #start the process    
+    print("FINISHED IN VIRTUAL ENV")
+    quit() 
 def runInIdle():
  user = 999
  logo()        #Print the logo
@@ -433,7 +434,9 @@ def fishMenu():
  if isInt != False: #if it is not a error    
   if int(user) in range(0,13): 
      addToOrder(user,item,price)
-
+  else: #if it is an int but not in the range then return an error
+        error("Not an option")
+        fishMenu()  
  elif user == "back": #the range wont let 13 blah blah
      main()   
  else:

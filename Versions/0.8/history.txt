@@ -1134,3 +1134,49 @@ Finished
 
 
 
+
+
+
+
+
+
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+Customer Name: Max
+Customer Phone Number: 123123123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 0
+Adress: 345 test road
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Finished
+
+
+
+
+
+
+
+
