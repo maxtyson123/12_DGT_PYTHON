@@ -33,7 +33,7 @@ chipsResponse = False
 amtOfFish = 0
 fishType = 0
 firstFishResponse = True
-SecondFishResponse = False
+secondFishResponse = False
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
@@ -74,38 +74,40 @@ def getResponse(ints, intents_json):
     list_of_intents = intents_json['intents']
     for i in list_of_intents:
         if(i['tag']== tag):
+            print("Tag: "+tag)
             if tag == "fish":
-               fishResponse = True
-               print(fishResponse)
-               result = random.choice(i['responses'])
-               ChatLog.insert(END, "Bot: " + result +'\n\n')
-                              
-               ChatLog.config(state=DISABLED)
-               ChatLog.yview(END)
+               print("-fish tag commnads")
+               result = "dotnPrint"
                fish(0,0)
-            if tag == "chips":
-               global chipsResponse
-               chipsResponse = True
-               print(chipsResponse)
-               chips(False,0)
-            result = random.choice(i['responses'])
-            break
+               break
+            elif tag == "chips":
+               print("-chips tag commnads")
+               print("running()")
+               chips(False, 0)
+               result = "dotnPrint"
+               break
+            else:
+             print("-any tag commnads")       
+             result = random.choice(i['responses'])
+             break
     return result
 
 def chatbot_response(msg):
     ints = predict_class(msg, model)
     res = getResponse(ints, intents)
+  
     return res
 
 #Food ordering
-def chips(isInput,amt):
+def chips(impt,amt):
    global chipsResponse
-   if isInput == False:
+   if impt == False:
        print("isInput FALSE")
        ChatLog.insert(END, "Bot: " + "How many scoops of chips would you like?" + '\n\n')
        ChatLog.config(state=DISABLED)
        ChatLog.yview(END)
-   if isInput == True:
+       chipsResponse = True
+   if impt == True:
        print("isInput TRUE")
        ChatLog.config(state=NORMAL)
        ChatLog.insert(END, "You: " + amt + '\n\n')
@@ -123,8 +125,11 @@ def fish(isInput,userInput):
    if isInput == 0:
        print("isInput FALSE")
        ChatLog.insert(END, "Bot: " + "What type of fish do you want." + '\n\n')
+       ChatLog.insert(END, "$4.10: " + "Shark, Flounder, Cod, Gurnet, John Dory, Gold Fish," + '\n\n')
+       ChatLog.insert(END, "$7.20: " + "Snapper, Pink Salmon, Tuna, Smoked Marlin, Kahwai, Dolphin" + '\n\n')
        ChatLog.config(state=DISABLED)
        ChatLog.yview(END)
+       firstFishResponse = True
    if isInput == 1:
        print("isInput TRUE")
        ChatLog.config(state=NORMAL)
@@ -135,20 +140,20 @@ def fish(isInput,userInput):
        ChatLog.yview(END)
        fishType = userInput 
        firstFishResponse = False
-       SecondFishResponse = True
+       secondFishResponse = True
    if isInput == 2:
        print("isInput TRUE")
        ChatLog.config(state=NORMAL)
        ChatLog.insert(END, "You: " + userInput  + '\n\n')
        ChatLog.config(foreground="#442265", font=("Verdana", 12 ))
-       ChatLog.insert(END, "Bot: " + "Adding " + userInput + " "+fishType+"to your order"+ '\n\n')
+       ChatLog.insert(END, "Bot: " + "Adding " + userInput + " "+fishType+" to your order"+ '\n\n')
        ChatLog.config(state=DISABLED)
        ChatLog.yview(END)
        amtOfFish = userInput
-       print("Passing "+userInput + " "+fishType+"to main.py")
+       print("Passing "+userInput + " "+fishType+" to main.py")
        amtOfFish = 0
        fishType = 0               
-       SecondFishResponse = False    
+       secondFishResponse = False    
    
 import tkinter
 from tkinter import *
@@ -158,30 +163,35 @@ def send():
     global chipsResponse
     global firstFishResponse
     global secondFishResponse
-    chipsResponse = False
     msg = EntryBox.get("1.0",'end-1c').strip()
     EntryBox.delete("0.0",END)
     print("chipsResponse: "+str(chipsResponse))
+    print("Running if chipsResponse")
     if chipsResponse == True:
        print("Chips amount is: "+msg)
        chips(True,msg)
+       return
     elif firstFishResponse == True:
-       print("Fish amount is: "+msg)
-       chips(1,msg)
+       print("Fish type is: "+msg)
+       print("Error is here")
+       fish(1,msg)
+       return
     elif secondFishResponse == True:
        print("Fish amount is: "+msg)
-       chips(1,msg)    
-    else:   
-       if msg != '':
+       fish(2,msg)
+       return
+    if msg != '':
         ChatLog.config(state=NORMAL)
         ChatLog.insert(END, "You: " + msg + '\n\n')
         ChatLog.config(foreground="#442265", font=("Verdana", 12 ))
 
         res = chatbot_response(msg)
-        ChatLog.insert(END, "Bot: " + res + '\n\n')
+        print(res)
+        if res != "dotnPrint":
+            ChatLog.insert(END, "Bot: " + res + '\n\n')
 
-        ChatLog.config(state=DISABLED)
-        ChatLog.yview(END)
+            ChatLog.config(state=DISABLED)
+            ChatLog.yview(END)
 
 
 base = Tk()

@@ -1,11 +1,14 @@
 venvMadeTrue
 CustomEnviroment
 F:\Projects\Python\VIRTUAL
-
 venvMadeTrue
 
-venvMadeTrue
 
-venvMadeTrue
 
-venvMadeTrue
+
+
+
+
+
+
+
