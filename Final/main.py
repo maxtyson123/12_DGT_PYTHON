@@ -28,98 +28,10 @@ userOrderPrice = []
 debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
-def venv():
- global venvExec
- global venvPipExec
- global chatBotLoc
- venvCheck = debugCheck("venv")#Check if virtual    
- if venvCheck == "venv":  
-  f = open("venv.txt", "a")     
-  f.write("") # Creates the file if not there
-  f.close()
-  f = open("data.txt", "a")     
-  f.write("") # Creates the file if not there
-  f.close()
-  print("Made files")
-  
-  venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
-  print("venvData"+str(venvData))
-  time.sleep(1)
- 
-  print("checked venv made doc") 
-  if venvData == True: #if the user has made the virtual enviroment before
-   print("VENV DATA TRUE")
-   setCustomData = checkFile("data.txt","CustomEnviroment")
-   if setCustomData == True:
-    path = customData("data.txt","CustomEnviroment")
-    venvExec = path+"\Scripts\python.exe"
-    venvPipExec = path+"\Scripts\pip.exe"
-   else:  
-       venvExec = os.getcwd()+"\VIRTUAL\Scripts\python.exe"
-       venvPipExec = os.getcwd()+"\VIRTUAL\Scripts\pip.exe"
-   chatBotLoc = os.getcwd()+"/../ChatBot"
-   pythonExists = os.path.isfile(venvExec) #Checks if python exists
-   pipExists = os.path.isfile(venvPipExec) #Checks if pip exists
-   if pipExists != True:
-    f = open("data.txt","r+")
-    f.truncate(0) #RESETS IT
-    if debug == "data":
-     print("Python doesnt exist, reset the venv made document")
-    f.close()
-   if pythonExists != True:
-    f = open("data.txt","r+")
-    f.truncate(0) #RESETS IT
-    if debug == "data":
-     print("Python doesnt exist, reset the venv made document")
-    f.close() 
-  elif venvData != True: #if the user has NOT made the virtual enviroment before
-        if idleCheck == True:
-         print("WARNING: DO NOT CLOSE THE WINDOW THAT OPENS") #if its in idle this will be shown.
-         time.sleep(1) #give user time to read the warning
-        else:
-            print("WARNING: DO NOT CLOSE THE CURRENT WINDOW")  
-        print("Installing Packages") 
-        os.system("py -m venv "+currentDir+"/VIRTUAL/")
-        venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
-        venvPipExec = currentDir+"/VIRTUAL/Scripts/pip.exe"
-        f = open("data.txt", "a")
-        f.write("\nvenvMadeTrue") #write that its been started
-        if debug == "data":
-             print("set file")
-        f.close()
-        requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
-        for x in requirmenets:
-           os.system(venvPipExec +' install '+x)   
-  if debug == "data":
-   print(currentDir)
-   print("venvExec: "+venvExec)
-   print("venvPipExec: "+venvPipExec)
-  programLoc = currentDir+"\main.py"
-  processStarted = checkFile("venv.txt","processVenvTrue")
-  if processStarted == True: #check if a cmd process with venv has started
-    f = open("venv.txt","r+")
-    f.truncate(0) #reset it
-    if debug == "data":
-     print("Reset file")
-    f.close()#Clear the file, this makes sure that when closed down a new one will open next run 
-    import keyboard
-    print("Imported Virtual Packages")
-    keyboard.press('f11') #makes it fullscreen
-  elif processStarted != True:
-    f = open("venv.txt", "a")
-    
-    f.write("processVenvTrue") #write that its been started
-    if debug == "data":
-     print("set file")
-    f.close()
-    if debug == "data":
-     print("started process")
-    os.system(venvExec +' '+programLoc) #start the process    
-    print("FINISHED IN VIRTUAL ENV")
-    quit()
+
 def customData(FilePath, fileArgs):
      file = open(FilePath, 'r+') #open the file
-     current = -1 #needs to start at negative one because the file indexing starts at zero
+     current = 0 
      lines = file.readlines() #read the lines
      for x in lines:
          current += 1
@@ -138,6 +50,7 @@ def howManyInArray(arrayName):
          arrayNum = arrayNum + 1
      return arrayNum   
 def checkFish(fish, array):
+    print("CHECKING FISH") 
     numFish = 0 #setup var
     printData = debugCheck("data")
     for x in array: 
@@ -152,10 +65,16 @@ def checkFile(FilePath, fileArgs):
      file = open(FilePath, 'r+') #open the file
      lines = file.readlines() #read the lines
      for x in lines:
-         print(x)  #print lines (for debuging)
          if str(x) == str(fileArgs): #if it is the same return true
             return True  
-               
+def deleteLine(FilePath, fileArgs):
+     with open(FilePath, "r") as f:
+         lines = f.readlines()
+     with open(FilePath, "w") as f:
+      for line in lines:
+        if line.strip("\n") != fileArgs:
+            f.write(line)
+
 def addToOrder(strItemID, foodList, priceList):
      printData = debugCheck("data")
     
@@ -298,6 +217,98 @@ def logo():
     """ + '\x1b[0m')#sets it back to white
 
 #MAIN FUNCTIONS
+def venv():
+ global venvExec
+ global venvPipExec
+ global chatBotLoc
+ venvCheck = debugCheck("venv")#Check if virtual
+ printData = debugCheck("data")
+ if venvCheck == "venv":  
+  f = open("venv.txt", "a")     
+  f.write("") # Creates the file if not there
+  f.close()
+  f = open("data.txt", "a")     
+  f.write("") # Creates the file if not there
+  f.close()
+  print("Made files")
+  
+  venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
+  if printData == "data":   
+       print("venvData"+str(venvData))
+  time.sleep(1)
+  if printData == "data":
+   print("checked venv made doc") 
+  if venvData == True: #if the user has made the virtual enviroment before
+   if printData == "data":  
+    print("VENV DATA TRUE")
+   setCustomData = checkFile("data.txt","CustomEnviroment")
+   if setCustomData == True:
+    path = customData("data.txt","CustomEnviroment")
+    venvExec = path+"\Scripts\python.exe"
+    venvPipExec = path+"\Scripts\pip.exe"
+   else:  
+       venvExec = os.getcwd()+"\VIRTUAL\Scripts\python.exe"
+       venvPipExec = os.getcwd()+"\VIRTUAL\Scripts\pip.exe"
+   chatBotLoc = os.getcwd()+"/../ChatBot"
+   pythonExists = os.path.isfile(venvExec) #Checks if python exists
+   pipExists = os.path.isfile(venvPipExec) #Checks if pip exists
+   if pipExists != True:
+    f = open("data.txt","r+")
+    f.truncate(0) #RESETS IT
+    if debug == "data":
+     print("Python doesnt exist, reset the venv made document")
+    f.close()
+   if pythonExists != True:
+    f = open("data.txt","r+")
+    f.truncate(0) #RESETS IT
+    if debug == "data":
+     print("Python doesnt exist, reset the venv made document")
+    f.close() 
+  elif venvData != True: #if the user has NOT made the virtual enviroment before
+        if idleCheck == True:
+         print("WARNING: DO NOT CLOSE THE WINDOW THAT OPENS") #if its in idle this will be shown.
+         time.sleep(1) #give user time to read the warning
+        else:
+            print("WARNING: DO NOT CLOSE THE CURRENT WINDOW")  
+        print("Installing Packages") 
+        os.system("py -m venv "+currentDir+"/VIRTUAL/")
+        venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
+        venvPipExec = currentDir+"/VIRTUAL/Scripts/pip.exe"
+        f = open("data.txt", "a")
+        f.write("\nvenvMadeTrue") #write that its been started
+        if debug == "data":
+             print("set file")
+        f.close()
+        requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
+        for x in requirmenets:
+           os.system(venvPipExec +' install '+x)   
+  if debug == "data":
+   print(currentDir)
+   print("venvExec: "+venvExec)
+   print("venvPipExec: "+venvPipExec)
+  programLoc = currentDir+"\main.py"
+  processStarted = checkFile("venv.txt","processVenvTrue")
+  if processStarted == True: #check if a cmd process with venv has started
+    f = open("venv.txt","r+")
+    f.truncate(0) #reset it
+    if debug == "data":
+     print("Reset file")
+    f.close()#Clear the file, this makes sure that when closed down a new one will open next run 
+    import keyboard
+    print("Imported Virtual Packages")
+    keyboard.press('f11') #makes it fullscreen
+  elif processStarted != True:
+    f = open("venv.txt", "a")
+    
+    f.write("processVenvTrue") #write that its been started
+    if debug == "data":
+     print("set file")
+    f.close()
+    if debug == "data":
+     print("started process")
+    os.system(venvExec +' '+programLoc) #start the process    
+    print("FINISHED IN VIRTUAL ENV")
+    quit() 
 def runInIdle():
  user = 999
  logo()        #Print the logo
@@ -433,7 +444,9 @@ def fishMenu():
  if isInt != False: #if it is not a error    
   if int(user) in range(0,13): 
      addToOrder(user,item,price)
-
+  else: #if it is an int but not in the range then return an error
+        error("Not an option")
+        fishMenu()  
  elif user == "back": #the range wont let 13 blah blah
      main()   
  else:
@@ -688,8 +701,14 @@ def DEBUG():
       os.system(venvExec +' '+programLoc)     
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp1):
-      os.system(venvExec +' '+chatBotLoc+"/chatgui.py") 
-      time.sleep(1)  
+      f = open("data.txt", "a")
+      f.write("\n") 
+      f.write("InABotEmulateTrue") 
+      f.close()     
+      os.system(venvExec +' '+chatBotLoc+"/chatgui.py")
+     
+      time.sleep(1)
+      deleteLine("data.txt", "InABotEmulateTrue")
       DEBUG()
       
  elif chatBotCheck == "chatBot" and user == str(chatBotOp2):
@@ -712,41 +731,43 @@ def DEBUG():
         error("Not an option")
         main()
 #PROGRAM
-debug = debugCheck("data") #Checks if data has been set in debug mode
-ignoreHistory = debugCheck("ignoreHistory") #Checks if ignoreHistory has been set in debug mode, this is just so Im not creating loads of entrys into the file while testing
-if debug == "data":
- print("Defined Functions, Set vars, Imported dependices")
- reset()
-if debug == "data":
- print("Reset files")
-if ignoreHistory != "ignoreHistory":
-     f = open("history.txt", "a")     
-     f.write("\n") # Creates a newline for a new order, this also creates the history file if its not there
-     f.close() 
-print ("##################################################################################################################")
-f = open(tempPath+"\session.txt", "a")
-f.write("----------------" + "\n") #Header the doc (used to indecate a break between sessions in the history)
-f.write("Today's date:"+ today + "\n") #Used to know when the order was started 
-f.close()
-if debug == "data":
- print("Opened File, Set file header")        
-idleCheck = "idlelib" in sys.modules # NOT PLACED IN VARIBLES BECUASE THEN in_idle() WOULD BE DEFIEND AFTER BEIGN CALLED WHICH RESULTS IN AN ERROR
-idleDebug = debugCheck("idle")#SAME HERE
-if debug == "data":
- print("Checked for idle and for idle debug tag")
- print("idleCheck: "+str(idleCheck))
-venv()  
-if idleCheck == True: #IF it is then run the next check
-        if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
-              if debug == "data":
-                print("idle debug tag set, dont show warning menu") 
-              error("Runnning in idle with debug mode")
-              main()
-        else: #else show the idle printSingleMenu
-             if debug == "data":
-               print("idle debug tag not set, showing warning")
-             runInIdle()
-else:
+botRun = checkFile("data.txt","InABotEmulateTrue")
+if botRun != True:
+     debug = debugCheck("data") #Checks if data has been set in debug mode
+     ignoreHistory = debugCheck("ignoreHistory") #Checks if ignoreHistory has been set in debug mode, this is just so Im not creating loads of entrys into the file while testing
      if debug == "data":
-      print("idle check returned false, running as normal")
-     main()   
+      print("Defined Functions, Set vars, Imported dependices")
+      reset()
+     if debug == "data":
+      print("Reset files")
+     if ignoreHistory != "ignoreHistory":
+          f = open("history.txt", "a")     
+          f.write("\n") # Creates a newline for a new order, this also creates the history file if its not there
+          f.close() 
+     print ("##################################################################################################################")
+     f = open(tempPath+"\session.txt", "a")
+     f.write("----------------" + "\n") #Header the doc (used to indecate a break between sessions in the history)
+     f.write("Today's date:"+ today + "\n") #Used to know when the order was started 
+     f.close()
+     if debug == "data":
+      print("Opened File, Set file header")        
+     idleCheck = "idlelib" in sys.modules # NOT PLACED IN VARIBLES BECUASE THEN in_idle() WOULD BE DEFIEND AFTER BEIGN CALLED WHICH RESULTS IN AN ERROR
+     idleDebug = debugCheck("idle")#SAME HERE
+     if debug == "data":
+      print("Checked for idle and for idle debug tag")
+      print("idleCheck: "+str(idleCheck))
+     venv()  
+     if idleCheck == True: #IF it is then run the next check
+             if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
+                   if debug == "data":
+                     print("idle debug tag set, dont show warning menu") 
+                   error("Runnning in idle with debug mode")
+                   main()
+             else: #else show the idle printSingleMenu
+                  if debug == "data":
+                    print("idle debug tag not set, showing warning")
+                  runInIdle()
+     else:
+          if debug == "data":
+           print("idle check returned false, running as normal")
+          main()   
