@@ -35,6 +35,8 @@ fishType = 0
 firstFishResponse = False
 secondFishResponse = False
 
+script.fakeDetails()
+
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
     sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
@@ -115,6 +117,12 @@ def chips(impt,amt):
        ChatLog.insert(END, "Bot: " + "Adding "+amt+" scoops of chips to your order" + '\n\n')
        ChatLog.config(state=DISABLED)
        ChatLog.yview(END)
+       result = script.addToOrder(12, amt)
+       print(result)
+       ChatLog.config(state=NORMAL)
+       ChatLog.insert(END, "SYSTEM: " + result + '\n\n')
+       ChatLog.config(state=DISABLED)
+       ChatLog.yview(END)    
        chipsResponse = False
    #pass the response to the main.py #i will have to make sure main.py can handle this later
 def fish(isInput,userInput):
@@ -124,9 +132,9 @@ def fish(isInput,userInput):
    global fishType
    if isInput == 0:
        print("isInput FALSE")
-       ChatLog.insert(END, "Bot: " + "What type of fish do you want." + '\n\n')
-       ChatLog.insert(END, "$4.10: " + "Shark, Flounder, Cod, Gurnet, John Dory, Gold Fish," + '\n\n')
+       ChatLog.insert(END, "$4.10: " + "Shark, Flounder, Cod, Gurnet, John Dory, Gold Fish," + '\n')
        ChatLog.insert(END, "$7.20: " + "Snapper, Pink Salmon, Tuna, Smoked Marlin, Kahwai, Dolphin" + '\n\n')
+       ChatLog.insert(END, "Bot: " + "What type of fish do you want." + '\n\n')
        ChatLog.config(state=DISABLED)
        ChatLog.yview(END)
        firstFishResponse = True
@@ -150,7 +158,14 @@ def fish(isInput,userInput):
        ChatLog.config(state=DISABLED)
        ChatLog.yview(END)
        amtOfFish = userInput
-       print("Passing "+userInput + " "+fishType+" to main.py")
+       fishType = script.fishNameToNumber(fishType)
+       print("Passing "+userInput + " "+str(fishType)+" to main.py")
+       result = script.addToOrder(fishType, amtOfFish)
+       print(result)
+       ChatLog.config(state=NORMAL)
+       ChatLog.insert(END, "SYSTEM: " + result + '\n\n')
+       ChatLog.config(state=DISABLED)
+       ChatLog.yview(END)
        amtOfFish = 0
        fishType = 0               
        secondFishResponse = False    

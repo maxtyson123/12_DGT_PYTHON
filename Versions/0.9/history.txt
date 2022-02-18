@@ -1,0 +1,1313 @@
+
+----------------
+Today's date:2022-02-11
+Customer Name: hh
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Item: Flounder Price: $4.10
+Exited, Not finished
+
+----------------
+Today's date:2022-02-11
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder Price: $4.10
+Exited, Not finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-12
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Canceled, Not finished
+
+----------------
+Today's date:2022-02-12
+Canceled, Not finished
+Customer Name: MAX
+Customer Phone Number: 12
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Canceled, Not finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-12
+Customer Name: Toatly not max testing this for the 1000th time
+Customer Phone Number: 027123456
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 0
+Adress: 123 Lala Land
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Finished
+
+----------------
+Today's date:2022-02-12
+Customer Name: Max
+Customer Phone Number: 123123
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 7.20
+Finished
+Finished
+
+
+----------------
+Today's date:2022-02-12
+Customer Name: Max
+Customer Phone Number: 2232323
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 7.20
+Finished
+Finished
+
+----------------
+Today's date:2022-02-12
+Customer Name: MAX1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder, Price: 4.10
+Finished
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-13
+Customer Name: 0
+Customer Phone Number: 0
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 1
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 7.20
+Finished
+
+----------------
+Today's date:2022-02-13
+Customer Name: Max
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 0
+Adress: --\
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 7.20
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-13
+Customer Name: MAx
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Exited, Not finished
+
+
+
+
+
+
+----------------
+Today's date:2022-02-13
+Exited, Not finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-15
+Customer Name: max
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 0
+Adress: 342 ik road
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Finished
+Exited, Not finished
+Exited, Not finished
+
+
+----------------
+Today's date:2022-02-15
+Exited, Not finished
+----------------
+Today's date:2022-02-15
+Exited, Not finished
+
+
+----------------
+Today's date:2022-02-15
+Exited, Not finished
+
+
+----------------
+Today's date:2022-02-15
+Customer Name: Max
+Customer Phone Number: 027123456
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 0
+Adress: 456 blahbah lane
+Item: Gold Fish, Price: 3.05
+Item: Gold Fish, Price: 3.05
+Item: Gold Fish, Price: 3.05
+Item: Gold Fish, Price: 3.05
+Item: Gold Fish, Price: 3.05
+Item: Gold Fish, Price: 3.05
+Item: Gold Fish, Price: 3.05
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+Customer Name: Max
+Customer Phone Number: 123456789
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 1
+Customer Name: Max
+Customer Phone Number: 123123123
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 0
+Adress: 12 Street Road
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Snapper, Price: 6.15
+Item: Snapper, Price: 6.15
+Item: Snapper, Price: 6.15
+Item: Smoked Marlin, Price: 6.15
+Item: Smoked Marlin, Price: 6.15
+Finished
+Exited, Not finished
+
+
+
+
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+Exited, Not finished
+
+
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+Exited, Not finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-14
+Error: Runnning in idle with debug mode
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+Exited, Not finished
+
+
+----------------
+Today's date:2022-02-14
+Error: Runnning in idle with debug mode
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+Exited, Not finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-14
+Error: Runnning in idle with debug mode
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+----------------
+Today's date:2022-02-15
+Canceled, Not finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+Customer Name: Max
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+Customer Name: Max
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+Customer Name: Max
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-16
+----------------
+Today's date:2022-02-16
+Customer Name: 1111
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+----------------
+Today's date:2022-02-17
+Customer Name: Max
+Customer Phone Number: 123123123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 0
+Adress: 345 test road
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Item: Tuna, Price: 7.20
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
