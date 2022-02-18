@@ -32,7 +32,7 @@ classes = pickle.load(open(path+'\classes.pkl','rb'))
 chipsResponse = False
 amtOfFish = 0
 fishType = 0
-firstFishResponse = True
+firstFishResponse = False
 secondFishResponse = False
 
 def clean_up_sentence(sentence):
