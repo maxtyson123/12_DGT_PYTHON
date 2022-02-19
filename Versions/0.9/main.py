@@ -748,10 +748,12 @@ def DEBUG():
       
  elif chatBotCheck == "chatBot" and user == str(chatBotOp2):
       os.system(venvExec +' '+chatBotLoc+"/train_chatbot.py")
-      time.sleep(12)
+      time.sleep(3)
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp3):
-      print("Tmmr")
+      os.system(venvExec +' '+chatBotLoc+"/intents.py")
+      time.sleep(1)
+      DEBUG()
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp4):
       print("DONT CLOSE ANY WINDOWS")
