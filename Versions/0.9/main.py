@@ -406,7 +406,10 @@ def runAgain():
     main()
  elif user == "1":
       print("1")
-      quit()   
+      quit()
+ else:
+     error("Not a option")
+     runAgain()
 def finish():
  printData = debugCheck("data")
  global colour

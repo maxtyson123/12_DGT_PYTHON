@@ -2,55 +2,49 @@
     "intents": [
         {
             "tag": "greeting",
-            "patterns": [ "Hi", "Hey", "Is anyone there?", "Hello", "Hay", "Whats Up?", "yello", "Hola", "Sup" ],
+            "patterns": [ "Hi", "Hey", "Is anyone there?", "Hello", "Hay", "Whats Up?", "yello", "Hola", "Sup", "yo", "greetings", "howdy", "good day" ],
             "responses": [ "Hello welcome to Freddys Fast Fish", "Hi welcome to Freddys Fast Fish", "Hi there welcome to Freddys Fast Fish" ],
             "context": [ "" ]
         },
         {
             "tag": "goodbye",
-            "patterns": [ "Bye", "See you later", "Goodbye"],
+            "patterns": [ "Bye", "See you later", "Goodbye", "cheerio", "parting", "toodle-oo" ],
             "responses": [ "Enjoy your meal", "Have a nice day", "Bye! Come back again", "Thanks for eating with Freddys Fast Fish", "" ],
             "context": [ "" ]
         },
         {
             "tag": "thanks",
-            "patterns": [ "Thanks", "Thank you", "Thats helpful", "Awesome thanks", "Thanks for helping me" ],
+            "patterns": [ "Thanks", "Thank you", "Thats helpful", "Awesome thanks", "Thanks for helping me", "YOu have my gratitude", "Cheers mate", "Praises to you", "Grace" ],
             "responses": [ "Happy to help!", "Any time!", "My pleasure" ],
             "context": [ "" ]
         },
         {
             "tag": "noanswer",
-            "patterns": [""],
+            "patterns": [ "" ],
             "responses": [ "Sorry, can't understand you", "Please give me more info", "Not sure I understand" ],
             "context": [ "" ]
         },
         {
             "tag": "options",
-            "patterns": [ "How you could help me?", "What you can do?", "What help you provide?", "How you can be helpful?", "What support is offered" ],
-            "responses": [ "I am a bot that can guide you through to process of ordering food from our menu", "I am a bot here to take your fish and chips order" ],
+            "patterns": [ "How you could help me?", "What you can do?", "What help you provide?", "How you can be helpful?", "What support is offered", "Who are you?", "What are you?", "Who you are?", "what is your name", "what should I call you", "what your name?" ],
+            "responses": [ "I am Freddy, a bot that can guide you through to process of ordering food from our menu", "I am Freddy, a bot here to take your fish and chips order", "Im Freddy, your bot phone operator", "Im Freddy, an Artificial Intelligent phone bot" ],
             "context": [ "" ]
         },
         {
             "tag": "about",
-            "patterns": [ "Who are you?", "What are you?", "Who you are?" ],
-            "responses": [ "Im Freddy, your bot phone operator", "Im Freddy, an Artificial Intelligent phone bot" ],
-            "context": [ "" ]
-        },
-        {
-            "tag": "name",
-            "patterns": [ "what is your name", "what should I call you", "what your name?" ],
-            "responses": [ "You can call me Freddy.", "Im Freddy!", "Just call me as Freddy" ],
+            "patterns": [],
+            "responses": [],
             "context": [ "" ]
         },
         {
             "tag": "fish",
-            "patterns": [ "can i have some fish?", "I would like to order some fish", "what sort of fish do you have", "can i have some snapper?" ],
+            "patterns": [ "can i have some fish?", "I would like to order some fish", "what sort of fish do you have", "can i have some snapper?", "I would like to order some fish", "Hey, what types of fish do you have", "my family wants fish", "Can we get some fish", "can i order a fish", "i would like a fish", "can you serve me some fish" ],
             "responses": [ "We have 6 Casual Fish Priced at 4.10 fish. And 6 Premium Fish Priced at 7.20 fish.", "FISH ORDER CODE HERE" ],
             "context": [ "" ]
         },
         {
             "tag": "chips",
-            "patterns": [ "can i have some chips?", "I would like to order some chips", "can I have 2 scoops of chips" ],
+            "patterns": [ "can i have some chips?", "I would like to order some chips", "can I have 2 scoops of chips", "can I have a bunch of hot chips", "do you serve chips", "my family wants chips", "Can we get some chips", "can i order a scoop of fries", "i would like a fries", "can you serve me some fries" ],
             "responses": [ "CHIP ORDER CODE HERE" ],
             "context": [ "" ]
         }
