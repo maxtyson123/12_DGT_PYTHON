@@ -1,4 +1,4 @@
-#Freddy's FAST FISH BY MAX TYSON FOR YR 12DGT PYTHON
+#FREDDYS FAST FISH BY MAX TYSON FOR YR 12DGT PYTHON
 #RUN ON CMD (NOT IDLE) FOR BEST EXPERIENCE
 
 #DEPENDICES
@@ -11,7 +11,7 @@ import tempfile
 import tkinter as tk
 from datetime import date
 
-#VARIABLES
+#VARIBLES
 today = str(date.today()) #Get todays date
 amtOfFish = 0
 totalCost = 0.00
@@ -27,8 +27,8 @@ fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper
 fishprice = [4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
 userOrder = []
 userOrderPrice = []
-debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows access to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: don't write to the history file} (venv: sets that the virtual environment has been setup so the other imports can work, this is because of pip)
-customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","delivery(0) or pick up(1)","address (last because its optional)"]
+debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
 def fakeDetails():
  global customerData
@@ -56,9 +56,9 @@ def customData(FilePath, fileArgs):
             current += 1 #add one to get the data below
             lineData = file[current] 
             print(lineData)
-          
+            return lineData  
                
-     return lineData   
+     return arrayNum   
 def howManyInArray(arrayName):
      arrayNum = 0
      for x in arrayName:
@@ -110,13 +110,13 @@ def addToOrder(strItemID, amt):
      if len(customerData) == 0: #check if there is the required info
           if botRun != True:
                error("Customer Info Not Entered, running the menu") 
-               CustomerDetails() #this is because it needs to know if the order is cooked or frozen, so it can apply the discount
+               CustomerDetails() #this is becuase it needs to know if the order is cooked or frozen, so it can apply the discount
           else:
              return("Customer Info not entered")  
      if botRun != True:
       amt = input (colour+" How many "+foodList[itemID] +" would you like: "+'\x1b[0m') #ask how many of the item the user would like
      try:
-         int(amt) #try's to convert to int
+         int(amt) #trys to convert to int
          isInt = True
      except ValueError: #if it cant the return error
       isInt = False
@@ -139,8 +139,8 @@ def addToOrder(strItemID, amt):
          userOrder.append (str(amt+" scoops of chips")) #and the amount of scoops
          userOrderPrice.append(chipsPrice) #add the cost to the list
          if printData == "data":
-          print("append to list")
-         if botRun != True: #this just makes sure the chatgui.py program doesn't run this
+          print("appened to list")
+         if botRun != True: #this just makes sure the chatgui.py program doesnt run this
           fishMenu()#go back 
      print(" The most fish you can order is 7.") # alert the user of the max     
      for x in range(int(amt)):
@@ -148,7 +148,7 @@ def addToOrder(strItemID, amt):
        if amtOfFish == 7:
          if botRun != True:   
           error("Max amount for "+foodList[itemID] +" has been ordered")
-          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fish tried.
+          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
          else:
           return("Added fish until reached max fish, 7")    
        else: 
@@ -166,7 +166,7 @@ def addToOrder(strItemID, amt):
         userOrder.append(foodList[itemID])
         userOrderPrice.append(fishPrice)
         if printData == "data":
-           print("append to list")
+           print("appened to list")
         f = open(tempPath+"\session.txt", "a")
         f.write("Item: " + foodList[itemID] + ", Price: " + str("{:.2f}".format(fishPrice)) + "\n") #add to the doc
         f.close()
@@ -184,14 +184,14 @@ def setHistory():
      historyDoc.close()
      tempdoc.close()#close them both
      if printData == "data":
-      print("wrote session.txt to history.txt")
+      print("wrote sesson.txt to history.txt")
 def printAFile(filepath):
      file = open(filepath, "r").read() #open the file in readmode
      print(file) #print the file
 def reset():
      global tempPath 
      fileExists = os.path.isfile(tempPath+"\session.txt") #Check if it exists
-     if fileExists == True: #if it doesn't exist no need to clear it because it will be created later on
+     if fileExists == True: #if it doesnt exist no need to clear it becuase it will be created later on
           f = open(tempPath+"\session.txt","r+")
           f.truncate(0) #reset it
           f.close()
@@ -230,7 +230,7 @@ def printDualMenu(printThis,priceThis):
     print ("##################################################################################################################")
     for x in range(len(printThis)): #for everything in the array print it plus its number 
         priceTag = "#"+"$"+str("{:.2f}".format(priceThis[x]))+"#" #this is to make the whole output is formated with ljust
-        numbering ="["+str(x)+"] "      #if it wasn't like this then we would have to calculate and add a ljust for everything in the print function
+        numbering ="["+str(x)+"] "      #if it wasnt like this then we would have to calculate and add a ljust for everything in the print function
         print (numbering.ljust(5)[:5]+printThis[x].ljust(102)[:102]+priceTag.ljust(8)[:8])
         
     print ("##################################################################################################################")
@@ -239,8 +239,8 @@ def logo():
  global colour
  global randColor  
  debug = debugCheck("Color") #Checks if color has been set in debug mode
- if debug != ("Color"): #if it inst then run the randomizer
-      colour = random.choice(randColor) #this stops the randomizer running even if you have set a colour  
+ if debug != ("Color"): #if it isnt then run the randomizer
+      colour = random.choice(randColor) #this stops the randomizer running even if you have set a colur  
  print("" + colour + """
     
  _____  ____     ___  ___    ___    __ __  __  _____     _____   ____  _____ ______      _____  ____ _____ __ __ 
@@ -271,8 +271,8 @@ def venv():
   f.close()
   print("Made files")
   #CHECKING THE VENV  
-  venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt because the file gets reset a lot
-  if venvData == True: #if the user has made the virtual environment before
+  venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
+  if venvData == True: #if the user has made the virtual enviroment before
    if printData == "data":  
     print("VENV DATA TRUE")
    setCustomData = checkFile("data.txt","CustomEnviroment")
@@ -291,15 +291,15 @@ def venv():
     f = open("data.txt","r+")
     f.truncate(0) #RESETS IT
     if debug == "data":
-     print("Python doesn't exist, reset the venv made document")
+     print("Python doesnt exist, reset the venv made document")
     f.close()
    if pythonExists != True:
     f = open("data.txt","r+")
     f.truncate(0) #RESETS IT
     if debug == "data":
-     print("Python doesn't exist, reset the venv made document")
+     print("Python doesnt exist, reset the venv made document")
     f.close() 
-  elif venvData != True: #if the user has NOT made the virtual environment before
+  elif venvData != True: #if the user has NOT made the virtual enviroment before
         print("WARNING: DO NOT CLOSE THE CURRENT WINDOW")  
         print("Installing Packages") 
         os.system("py -m venv "+currentDir+"/VIRTUAL/")
@@ -345,8 +345,8 @@ def venv():
 def runInIdle():
  user = 999
  logo()        #Print the logo
- print("NOTE: Running in Idle can make the user experience worse (Console wont clear and ANSI colors don't work.)")
- idle_printSingleMenu = ["Continue (RECOMMENDED)","Run in idle","Exit"]
+ print("NOTE: Running in Idle can make the user experience worse (Console wont clear and ANSI colors dont work.)")
+ idle_printSingleMenu = ["Continue (RECOMENDED)","Run in idle","Exit"]
  printSingleMenu(idle_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
@@ -424,14 +424,14 @@ def finish():
  if printData == "data":
       print("Checked customer info")    
  print("---ITEMS---")
- printDualMenu(userOrder, userOrderPrice)#print the user  lists
+ printDualMenu(userOrder, userOrderPrice)#print the user  listss
 
  print("---TYPES---")
  if customerData[3] == "0": #if its delivery
   print("Order Type: "+"Delivery")
   totalCost = totalCost + 5.00 #add the delivery charge
   if printData == "data":
-      print("Added delivery charge")
+      print("Added dilivery charge")
  else:
   print("Order Type: "+"Pick Up")
  if customerData[2] == "0":
@@ -444,12 +444,12 @@ def finish():
  print("Phonenumber: "+str(customerData[1]))
  if customerData[3] == "0":
   if printData == "data":
-      print("IS delivery so printing address")    
-  print("Address: "+str(customerData[4]))
+      print("IS dilivery so printing adress")    
+  print("Adress: "+str(customerData[4]))
   
  print ("##################################################################################################################")
  print("---COST---")
- print("Price: $"+"{:.2f}".format(totalCost)) #format the cost because python does maths wrong with memory errors so it  will look like 41.0000000000006 instead og 41.00
+ print("Price: $"+"{:.2f}".format(totalCost)) #format the cost becuase python does maths wrong with memory errors so it  will look like 41.0000000000006 instead og 41.00
  print ("##################################################################################################################")
  setHistory()    
  f = open("history.txt", "a")     
@@ -472,7 +472,7 @@ def fishMenu():
  printDualMenu(fishs, fishprice) #Print printDualMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')   
  try:
-   int(user) #try's to convert to int
+   int(user) #trys to convert to int
    isInt = True
    if printData == "data":
       print("Input is an int") 
@@ -512,7 +512,7 @@ def CustomerDetails():
  phoneNumber = input (colour+"Please enter your phone number: "+'\x1b[0m')
  phoneisNumber = phoneNumber    
  try:
-    int(phoneNumber) #try's to convert to int
+    int(phoneNumber) #trys to convert to int
     phoneisNumber = True
  except ValueError: #if it cant the return error
     phoneisNumber = False
@@ -562,9 +562,9 @@ def CustomerDetails():
  if printData == "data":
       print("Got Pick Up Or Delivery number")     
  if customerData[3] == "0":
-  address = input (colour+"Please enter your address: "+'\x1b[0m')
-  customerData.append(address)
-  f.write("Address: "+address+"\n")
+  adress = input (colour+"Please enter your adress: "+'\x1b[0m')
+  customerData.append(adress)
+  f.write("Adress: "+adress+"\n")
  f.close()
  print("All details entered")
  time.sleep(.5)
@@ -581,7 +581,7 @@ def main():
  main_printSingleMenu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current"]
  main_printSingleMenu.append("Exit")
  exit1 = howManyInArray(main_printSingleMenu)  #get its place for the input
- exit1 = exit1 - 1 #take away 1 because the array starts at 0 but the counter starts at 1
+ exit1 = exit1 - 1 #take away 1 becuase the array starts at 0 but the counter starts at 1
  printSingleMenu(main_printSingleMenu) #Print printSingleMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
@@ -759,10 +759,10 @@ def DEBUG():
       DEBUG()
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp4):
-      print("don't CLOSE ANY WINDOWS")
+      print("DONT CLOSE ANY WINDOWS")
       time.sleep(1)
-      requirements = ["numPy","Flask","nltk","tensorflow"] #these aren't installed in main startup because they can be big and are optional 
-      for x in requirements:
+      requirmenets = ["numPy","Flask","nltk","tensorflow"] #these arent installed in main startup becuase they can be big and are optional 
+      for x in requirmenets:
            os.system(venvPipExec +' install '+x)   
       DEBUG()     
  elif user == str(exit1):
@@ -774,7 +774,7 @@ def DEBUG():
 botRun = checkFile("data.txt","InABotEmulateTrue")
 if botRun != True:
      debug = debugCheck("data") #Checks if data has been set in debug mode
-     ignoreHistory = debugCheck("ignoreHistory") #Checks if ignoreHistory has been set in debug mode, this is just so Im not creating loads of entry's into the file while testing
+     ignoreHistory = debugCheck("ignoreHistory") #Checks if ignoreHistory has been set in debug mode, this is just so Im not creating loads of entrys into the file while testing
      if debug == "data":
       print("Defined Functions, Set vars, Imported dependices")
       reset()
@@ -786,12 +786,12 @@ if botRun != True:
           f.close() 
      print ("##################################################################################################################")
      f = open(tempPath+"\session.txt", "a")
-     f.write("----------------" + "\n") #Header the doc (used to indicate a break between sessions in the history)
+     f.write("----------------" + "\n") #Header the doc (used to indecate a break between sessions in the history)
      f.write("Today's date:"+ today + "\n") #Used to know when the order was started 
      f.close()
      if debug == "data":
       print("Opened File, Set file header")        
-     idleCheck = "idlelib" in sys.modules # NOT PLACED IN VARIABLES BECAUSE THEN in_idle() WOULD BE DEFINED AFTER BEING CALLED WHICH RESULTS IN AN ERROR
+     idleCheck = "idlelib" in sys.modules # NOT PLACED IN VARIBLES BECUASE THEN in_idle() WOULD BE DEFIEND AFTER BEIGN CALLED WHICH RESULTS IN AN ERROR
      idleDebug = debugCheck("idle")#SAME HERE
      if debug == "data":
       print("Checked for idle and for idle debug tag")
@@ -800,8 +800,8 @@ if botRun != True:
      if idleCheck == True: #IF it is then run the next check
              if idleDebug == "idle": #if the debug tag is set to idle then alert that it is and continue
                    if debug == "data":
-                     print("idle debug tag set, don't show warning menu") 
-                   error("Running in idle with debug mode")
+                     print("idle debug tag set, dont show warning menu") 
+                   error("Runnning in idle with debug mode")
                    main()
              else: #else show the idle printSingleMenu
                   if debug == "data":

@@ -1,5 +1,6 @@
 #FREDDYS FAST FISH BY MAX TYSON FOR YR 12DGT PYTHON
 #RUN ON CMD (NOT IDLE) FOR BEST EXPERIENCE
+#VERSION CONTROL AT https://github.com/maxtyson123/12_DGT_PYTHON/
 
 #DEPENDICES
 import os
@@ -23,12 +24,27 @@ venvPipExec =""
 chatBotLoc =""
 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
+fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips"]
+fishprice = [4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
 userOrder = []
 userOrderPrice = []
 debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
-
+def fakeDetails():
+ global customerData
+ customerData.append("ORDER VIA BOT")
+ customerData.append(123456789)
+ customerData.append(1)
+ customerData.append(1)
+def fishNameToNumber(fishName):
+     fish = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin"]
+     fishNumber = 0
+     for x in fish:
+          fishNumber += 1
+          if fishName == x:
+             return fishNumber
+     return("Not a fish")     
 def customData(FilePath, fileArgs):
      file = open(FilePath, 'r+') #open the file
      current = 0 
@@ -65,6 +81,9 @@ def checkFile(FilePath, fileArgs):
      file = open(FilePath, 'r+') #open the file
      lines = file.readlines() #read the lines
      for x in lines:
+         printData = debugCheck("data")
+         if printData == True:
+             print(x)
          if str(x) == str(fileArgs): #if it is the same return true
             return True  
 def deleteLine(FilePath, fileArgs):
@@ -75,18 +94,28 @@ def deleteLine(FilePath, fileArgs):
         if line.strip("\n") != fileArgs:
             f.write(line)
 
-def addToOrder(strItemID, foodList, priceList):
+def addToOrder(strItemID, amt):
      printData = debugCheck("data")
+     botRun = checkFile("data.txt","InABotEmulateTrue")
     
      global userOrder
      global userOrderPrice
      global totalCost
-     global customerData 
+     global customerData
+     global fishs
+     global fishprice
+
+     foodList  = fishs
+     priceList = fishprice
      itemID = int(strItemID)#convert to into int
-     if len(customerData) == 0: #check if there is the required info 
-          error("Customer Info Not Entered, running the menu") 
-          CustomerDetails() #this is becuase it needs to know if the order is cooked or frozen, so it can apply the discount
-     amt = input (colour+" How many "+foodList[itemID] +" would you like: "+'\x1b[0m') #ask how many of the item the user would like
+     if len(customerData) == 0: #check if there is the required info
+          if botRun != True:
+               error("Customer Info Not Entered, running the menu") 
+               CustomerDetails() #this is becuase it needs to know if the order is cooked or frozen, so it can apply the discount
+          else:
+             return("Customer Info not entered")  
+     if botRun != True:
+      amt = input (colour+" How many "+foodList[itemID] +" would you like: "+'\x1b[0m') #ask how many of the item the user would like
      try:
          int(amt) #trys to convert to int
          isInt = True
@@ -95,9 +124,12 @@ def addToOrder(strItemID, foodList, priceList):
 
      if isInt == False: #if it is a error
       if printData == "data":
-       print("int returned false")       
-      error("Not an number, Re running.") #print the error
-      fishMenu() #go back to the menu
+       print("int returned false")
+      if botRun == True:
+         return("NOT AN AMOUNT")  
+      else:     
+       error("Not an number, Re running.") #print the error
+       fishMenu() #go back to the menu
      if itemID == 12: #IF ITS chips
          print(amt)
          chipsPrice = priceList[itemID]*float(amt) #convert to int times the price by the amt
@@ -109,16 +141,20 @@ def addToOrder(strItemID, foodList, priceList):
          userOrderPrice.append(chipsPrice) #add the cost to the list
          if printData == "data":
           print("appened to list")
-         fishMenu()#go back 
+         if botRun != True: #this just makes sure the chatgui.py program doesnt run this
+          fishMenu()#go back 
      print(" The most fish you can order is 7.") # alert the user of the max     
      for x in range(int(amt)):
        amtOfFish = checkFish(foodList[itemID], userOrder)    
        if amtOfFish == 7:
-         error("Max amount for "+foodList[itemID] +" has been ordered")
-         fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
+         if botRun != True:   
+          error("Max amount for "+foodList[itemID] +" has been ordered")
+          fishMenu() #go back to the menu, this prevents it from running again for the remaining number of fsih tried.
+         else:
+          return("Added fish until reached max fish, 7")    
        else: 
         print("Added "+foodList[itemID] +": " + str(x+1)) #this is to show the user that the item actually has been added,  add one to make it count properly bc lists idex starting at 0   
-        amtOfFish = amtOfFish + 1   #add to the max
+        
         totalCost = totalCost + priceList[itemID]   #add to the cost
         if printData == "data":
            print("added to vars")
@@ -137,7 +173,10 @@ def addToOrder(strItemID, foodList, priceList):
         f.close()
         if printData == "data":
          print("wrote to file")
-     fishMenu() #go back to the menu
+     if botRun != True:    
+      fishMenu() #go back to the menu
+     else:
+      return("Done")    
 def setHistory():
      printData = debugCheck("data")
      historyDoc = open("history.txt", 'a+') #open the history doc
@@ -221,6 +260,7 @@ def venv():
  global venvExec
  global venvPipExec
  global chatBotLoc
+ global currentDir
  venvCheck = debugCheck("venv")#Check if virtual
  printData = debugCheck("data")
  if venvCheck == "venv":  
@@ -231,19 +271,15 @@ def venv():
   f.write("") # Creates the file if not there
   f.close()
   print("Made files")
-  
+  #CHECKING THE VENV  
   venvData = checkFile("data.txt","venvMadeTrue") #wanted to but cant use venv.txt becuase the file gets reset a lot
-  if printData == "data":   
-       print("venvData"+str(venvData))
-  time.sleep(1)
-  if printData == "data":
-   print("checked venv made doc") 
   if venvData == True: #if the user has made the virtual enviroment before
    if printData == "data":  
     print("VENV DATA TRUE")
    setCustomData = checkFile("data.txt","CustomEnviroment")
    if setCustomData == True:
     path = customData("data.txt","CustomEnviroment")
+    print("Got custom data")
     venvExec = path+"\Scripts\python.exe"
     venvPipExec = path+"\Scripts\pip.exe"
    else:  
@@ -265,11 +301,7 @@ def venv():
      print("Python doesnt exist, reset the venv made document")
     f.close() 
   elif venvData != True: #if the user has NOT made the virtual enviroment before
-        if idleCheck == True:
-         print("WARNING: DO NOT CLOSE THE WINDOW THAT OPENS") #if its in idle this will be shown.
-         time.sleep(1) #give user time to read the warning
-        else:
-            print("WARNING: DO NOT CLOSE THE CURRENT WINDOW")  
+        print("WARNING: DO NOT CLOSE THE CURRENT WINDOW")  
         print("Installing Packages") 
         os.system("py -m venv "+currentDir+"/VIRTUAL/")
         venvExec = currentDir+"/VIRTUAL/Scripts/python.exe"
@@ -282,6 +314,8 @@ def venv():
         requirmenets = ["Keyboard"] #Yes i know that there is only one in the list but that is to make this script more scalable.
         for x in requirmenets:
            os.system(venvPipExec +' install '+x)   
+
+#Starting the program
   if debug == "data":
    print(currentDir)
    print("venvExec: "+venvExec)
@@ -371,7 +405,10 @@ def runAgain():
     main()
  elif user == "1":
       print("1")
-      quit()   
+      quit()
+ else:
+     error("Not a option")
+     runAgain()
 def finish():
  printData = debugCheck("data")
  global colour
@@ -429,9 +466,11 @@ def fishMenu():
  clear()   
  user = 999
  logo() #Print the logo
- item = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips","Type 'back' To Go Back"]
- price = [4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00,0.00]
- printDualMenu(item, price) #Print printDualMenu
+ global fishs
+ global fishprice
+ fishs.append("Type 'back' To Go Back")
+ fishprice.append(0.00)
+ printDualMenu(fishs, fishprice) #Print printDualMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')   
  try:
    int(user) #trys to convert to int
@@ -443,7 +482,7 @@ def fishMenu():
       
  if isInt != False: #if it is not a error    
   if int(user) in range(0,13): 
-     addToOrder(user,item,price)
+     addToOrder(user, 0)
   else: #if it is an int but not in the range then return an error
         error("Not an option")
         fishMenu()  
@@ -713,10 +752,12 @@ def DEBUG():
       
  elif chatBotCheck == "chatBot" and user == str(chatBotOp2):
       os.system(venvExec +' '+chatBotLoc+"/train_chatbot.py")
-      time.sleep(12)
+      time.sleep(3)
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp3):
-      print("Tmmr")
+      os.system(venvExec +' '+chatBotLoc+"/intents.py")
+      time.sleep(1)
+      DEBUG()
       DEBUG()
  elif chatBotCheck == "chatBot" and user == str(chatBotOp4):
       print("DONT CLOSE ANY WINDOWS")
