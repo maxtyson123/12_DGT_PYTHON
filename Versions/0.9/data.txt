@@ -1,14 +1,4 @@
-venvMadeTrue
 CustomEnviroment
-F:\Projects\Python\VIRTUAL
+F:/aa/aa/aa
 
 venvMadeTrue
-
-venvMadeTrue
-
-venvMadeTrue
-
-
-
-
-InABotEmulateTrue

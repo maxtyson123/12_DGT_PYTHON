@@ -1581,3 +1581,139 @@ Item: Flounder, Price: 4.10
 Finished
 
 
+
+
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+Customer Name: mAX
+Customer Phone Number: 012341
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 0
+Adress: 11 street
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+
+
+
+
+
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+----------------
+Today's date:2022-02-21
+Customer Name: max
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-21
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder, Price: 4.10
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 1
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Item: Flounder, Price: 3.05
+Finished
+
+
+
+
+
+
+
+
+
