@@ -27,9 +27,45 @@ fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper
 fishs[0].append("Type 'back' To Go Back") #ADD THE BACK TEXT
 fishs[1].append(0.00) #ADD THHE NULL PRICE FOR BACK
 userOrder = [],[]
-debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+debugMode = ["idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+def deletePortion(FilePath, startLine, endLine):
+     file = open(FilePath, 'r+') #open the file (read)
+     lines = file.readlines()
+     file = open(FilePath, 'w+') #open the file (write)
+     for number, line in enumerate(lines):
+        if number not in range(startLine, endLine):
+            file.write(line)
+        else:
+             file.write("Data DELETED \n")
+     file.close()       
+def getEndLine(FilePath, sartLine, endIndicator):
+     file = open(FilePath, 'r+') #open the file
+     current = 0
+     current2 = 0
+     lines = file.readlines() #read the lines
+     beginCounter2 = False
+     for x in lines:      
+         current += 1
+         if int(current) == int(sartLine):
+            current2 = current
+            beginCounter2 = True 
+         elif beginCounter2 == True:
+             current2 += 1
+             if endIndicator in x:
+              print(current2)
+              return current2
+def checkTwoLines(FilePath, fileArgs1, fileArgs2):
+     file = open(FilePath, 'r+') #open the file
+     current = 0 
+     lines = file.readlines() #read the lines
+     for x in lines:
+         current += 1
+         if fileArgs1 in x and fileArgs2 in x:
+
+             return current
+     return False
 
 def fakeDetails():
  global customerData
@@ -88,10 +124,10 @@ def checkFile(FilePath, fileArgs):
          if str(x) == str(fileArgs): #if it is the same return true
             return True  
 def deleteLine(FilePath, fileArgs):
-     with open(FilePath, "r") as f:
-         lines = f.readlines()
-     with open(FilePath, "w") as f:
-      for line in lines:
+     f = open(FilePath, "r") #open in read mode
+     lines = f.readlines() 
+     f = open(FilePath, "w") #open in write mode
+     for line in lines:
         if line.strip("\n") != fileArgs:
             f.write(line)
 
@@ -504,7 +540,7 @@ def CustomerDetails():
     if printData == "data":
       print("Reseting file")      
  name = input (colour+"Please enter your name: "+'\x1b[0m') #Yes i know it allows a number but thats  bc what if your named prince harry the 3rd? 
- f.write("Customer Name: "+name+"\n")
+
  customerData.append(name)
  if printData == "data":
       print("Got and Set Name")   
@@ -520,7 +556,7 @@ def CustomerDetails():
    error("Not an number, Re running ")
    customerData.clear() # resets the user data
    CustomerDetails()
- f.write("Customer Phone Number: "+phoneNumber+"\n")
+
  customerData.append(phoneNumber)
  if printData == "data":
       print("Got phone number")   
@@ -531,13 +567,12 @@ def CustomerDetails():
  printSingleMenu(frozenOrCooked) #Print printSingleMenu
  pickFrozenOrCooked = input (colour+"Please choose an option: "+'\x1b[0m')
  if pickFrozenOrCooked == "0":
-       f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
+     
        customerData.append(pickFrozenOrCooked)
        
  elif pickFrozenOrCooked == "1":
         customerData.append(pickFrozenOrCooked)
-        f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
-        
+ 
  else:
    error("Not an option, Re running ")
    customerData.clear() # resets the user data
@@ -549,11 +584,11 @@ def CustomerDetails():
  printSingleMenu(pickUpOrDelivery)
  pickPickUpOrDelivery = input (colour+"Please choose an option: "+'\x1b[0m')
  if pickPickUpOrDelivery == "0":
-       f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+
        customerData.append(pickPickUpOrDelivery)
  elif pickPickUpOrDelivery == "1":
         customerData.append(pickPickUpOrDelivery)
-        f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+
  else:
    error("Not an option, Re running ")
    customerData.clear() # resets the user data
@@ -563,7 +598,12 @@ def CustomerDetails():
  if customerData[3] == "0":
   adress = input (colour+"Please enter your adress: "+'\x1b[0m')
   customerData.append(adress)
-  f.write("Adress: "+adress+"\n")
+ 
+ f.write("Customer Name: "+name+"\n")
+ f.write("Customer Phone Number: "+phoneNumber+"\n")
+ f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
+ f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+ f.write("Adress: "+adress+"\n")
  f.close()
  print("All details entered")
  time.sleep(.5)
@@ -636,7 +676,7 @@ def DEBUG():
  userColor = 0
  
  logo() #Print the logo
- debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir"]
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir", "Delte user data"]
  venvCheck = debugCheck("venv")#Check if virtual
  if venvCheck == "venv":
   
@@ -727,7 +767,15 @@ def DEBUG():
  elif user == "10":   
      print(os.getcwd())
      time.sleep(1.5)
-     DEBUG()      
+     DEBUG()
+ elif user == "11":
+     customerName = input("Customer's Name: ")
+     startLine = checkTwoLines("history.txt","Customer Name:",customerName)
+     endLine = getEndLine("history - Copy.txt", startLine, "----------------")
+     print(str(startLine) +" "+str(endLine))
+     deletePortion("history.txt", startLine, endLine)
+     time.sleep(1.5)
+     DEBUG()       
  elif venvCheck == "venv" and user == str(venvOp1):
       package = input("Package name: ")
       os.system(venvPipExec +' install '+package)
@@ -784,7 +832,8 @@ if botRun != True:
           f.close() 
      print ("##################################################################################################################")
      f = open(tempPath+"\session.txt", "a")
-     f.write("----------------" + "\n") #Header the doc (used to indecate a break between sessions in the history)
+     f.write("----------------") #Header the doc (used to indecate a break between sessions in the history)
+     f.write("\n")
      f.write("Today's date:"+ today + "\n") #Used to know when the order was started 
      f.close()
      if debug == "data":

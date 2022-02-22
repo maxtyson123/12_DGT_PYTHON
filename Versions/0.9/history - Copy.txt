@@ -184,37 +184,37 @@ Canceled, Not finished
 ----------------
 Today's date:2022-02-12
 Customer Name: Toatly not max testing this for the 1000th time
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
+Customer Phone Number: 027123456
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 0
+Adress: 123 Lala Land
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Gold Fish, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Finished
+
+----------------
 Today's date:2022-02-12
 Customer Name: Max
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
-Data DELETED 
+Customer Phone Number: 123123
+Pick Frozen Or Cooked: 0
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 4.10
+Item: Dolphin, Price: 7.20
+Finished
+Finished
+
+
+----------------
 Today's date:2022-02-12
 Customer Name: Max
 Customer Phone Number: 2232323
@@ -2421,9 +2421,6 @@ Today's date:2022-02-22
 ----------------
 Today's date:2022-02-22
 Exited, Not finished
-
-
-
 
 
 
