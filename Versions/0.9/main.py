@@ -23,13 +23,14 @@ venvPipExec =""
 chatBotLoc =""
 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
-fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips"]
-fishprice = [4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
-userOrder = []
-userOrderPrice = []
+fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips"],[4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
+fishs[0].append("Type 'back' To Go Back") #ADD THE BACK TEXT
+fishs[1].append(0.00) #ADD THHE NULL PRICE FOR BACK
+userOrder = [],[]
 debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+
 def fakeDetails():
  global customerData
  customerData.append("ORDER VIA BOT")
@@ -37,7 +38,8 @@ def fakeDetails():
  customerData.append(1)
  customerData.append(1)
 def fishNameToNumber(fishName):
-     fish = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin"]
+     global fishs
+     fish = fishs[0]
      fishNumber = 0
      for x in fish:
           fishNumber += 1
@@ -62,7 +64,7 @@ def customData(FilePath, fileArgs):
 def howManyInArray(arrayName):
      arrayNum = 0
      for x in arrayName:
-         arrayNum = arrayNum + 1
+         arrayNum += 1
      return arrayNum   
 def checkFish(fish, array):
     print("CHECKING FISH") 
@@ -98,14 +100,11 @@ def addToOrder(strItemID, amt):
      botRun = checkFile("data.txt","InABotEmulateTrue")
     
      global userOrder
-     global userOrderPrice
      global totalCost
      global customerData
      global fishs
-     global fishprice
-
-     foodList  = fishs
-     priceList = fishprice
+     foodList  = fishs[0]
+     priceList = fishs[1]
      itemID = int(strItemID)#convert to into int
      if len(customerData) == 0: #check if there is the required info
           if botRun != True:
@@ -136,15 +135,15 @@ def addToOrder(strItemID, amt):
          if printData == "data":
           print("set chips price")
          totalCost = totalCost + chipsPrice #add the cost
-         userOrder.append (str(amt+" scoops of chips")) #and the amount of scoops
-         userOrderPrice.append(chipsPrice) #add the cost to the list
+         userOrder[0].append (str(amt+" scoops of chips")) #and the amount of scoops
+         userOrder[1].append(chipsPrice) #add the cost to the list
          if printData == "data":
           print("appened to list")
          if botRun != True: #this just makes sure the chatgui.py program doesnt run this
           fishMenu()#go back 
      print(" The most fish you can order is 7.") # alert the user of the max     
      for x in range(int(amt)):
-       amtOfFish = checkFish(foodList[itemID], userOrder)    
+       amtOfFish = checkFish(foodList[itemID], userOrder[0])    
        if amtOfFish == 7:
          if botRun != True:   
           error("Max amount for "+foodList[itemID] +" has been ordered")
@@ -163,8 +162,8 @@ def addToOrder(strItemID, amt):
                 print("Fish type: Frozen")
            totalCost = totalCost - 1.05 #take away the discount
            fishPrice = priceList[itemID] - 1.05
-        userOrder.append(foodList[itemID])
-        userOrderPrice.append(fishPrice)
+        userOrder[0].append(foodList[itemID])
+        userOrder[1].append(fishPrice)
         if printData == "data":
            print("appened to list")
         f = open(tempPath+"\session.txt", "a")
@@ -226,7 +225,9 @@ def printSingleMenu(printThis):
     for x in range(len(printThis)): #for everything in the array print it plus its number
         print ("["+str(x)+"] "+printThis[x])
     print ("##################################################################################################################")
-def printDualMenu(printThis,priceThis):
+def printDualMenu(multiArray):
+    printThis = multiArray[0]
+    priceThis = multiArray[1]
     print ("##################################################################################################################")
     for x in range(len(printThis)): #for everything in the array print it plus its number 
         priceTag = "#"+"$"+str("{:.2f}".format(priceThis[x]))+"#" #this is to make the whole output is formated with ljust
@@ -376,7 +377,6 @@ def runAgain():
  printData = debugCheck("data")    
  global colour
  global userOrder
- global userOrderPrice
  global amtOfFish
  global totalCost
  clear()   
@@ -392,8 +392,8 @@ def runAgain():
     if printData == "data":
       print("Reset the file") 
     #clear the lists
-    userOrder.clear()
-    userOrderPrice.clear()
+    userOrder[0].clear()
+    userOrder[1].clear()
     customerData.clear()
     if printData == "data":
       print("reset the array/lists")
@@ -412,7 +412,6 @@ def finish():
  printData = debugCheck("data")
  global colour
  global userOrder
- global userOrderPrice
  global totalCost
  global customerData
  clear()   
@@ -424,7 +423,7 @@ def finish():
  if printData == "data":
       print("Checked customer info")    
  print("---ITEMS---")
- printDualMenu(userOrder, userOrderPrice)#print the user  listss
+ printDualMenu(userOrder)#print the user  listss
 
  print("---TYPES---")
  if customerData[3] == "0": #if its delivery
@@ -466,10 +465,8 @@ def fishMenu():
  user = 999
  logo() #Print the logo
  global fishs
- global fishprice
- fishs.append("Type 'back' To Go Back")
- fishprice.append(0.00)
- printDualMenu(fishs, fishprice) #Print printDualMenu
+
+ printDualMenu(fishs) #Print printDualMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')   
  try:
    int(user) #trys to convert to int
@@ -479,8 +476,10 @@ def fishMenu():
  except ValueError: #if it cant then return error
       isInt = False
       
- if isInt != False: #if it is not a error    
-  if int(user) in range(0,13): 
+ if isInt != False: #if it is not a error
+  fishRange = howManyInArray(fishs[0])
+  fishRange -= 1
+  if int(user) in range(fishRange): 
      addToOrder(user, 0)
   else: #if it is an int but not in the range then return an error
         error("Not an option")
@@ -573,7 +572,7 @@ def CustomerDetails():
 def main():
  global colour
  global userOrder
- global userOrderPrice
+
  clear()   
  user = 999
  allowDebug = debugCheck("DEBUG")
@@ -600,8 +599,8 @@ def main():
       f.write("Canceled, Not finished"+ "\n") #Used to know why the order was canceled in history file
       f.close()
       reset() #Rest the file
-      userOrder.clear()
-      userOrderPrice.clear()
+      userOrder[0].clear()
+      userOrder[1].clear()
       customerData.clear()
       amtOfFish = 0 #reset the fish
       totalCost = 0.00 # zero out the price
@@ -628,7 +627,6 @@ def DEBUG():
  global customerData
  global tempPath
  global userOrder
- global userOrderPrice
  global totalCost
  global venvExec
  global venvPipExec
@@ -715,7 +713,7 @@ def DEBUG():
       input("press enter to finish \n")
       DEBUG()
  elif user == "7":
-       printDualMenu(userOrder, userOrderPrice)
+       printDualMenu(userOrder)
        input("press enter to finish \n")
        DEBUG()
  elif user == "8":   

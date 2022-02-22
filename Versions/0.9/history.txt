@@ -1717,3 +1717,510 @@ Finished
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Customer Name: Max
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Finished
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Customer Name: 1
+Customer Phone Number: 1
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+----------------
+Today's date:2022-02-22
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Finished
+
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Customer Name: 1
+Customer Phone Number: 1
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+----------------
+Today's date:2022-02-22
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-22
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Finished
+
+----------------
+Today's date:2022-02-22
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Finished
+
+----------------
+Today's date:2022-02-22
+Canceled, Not finished
+Canceled, Not finished
+
+
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+Canceled, Not finished
+
+
+
+
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Item: Cod, Price: 4.10
+Finished
+
+
+
+
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Customer Name: a
+Customer Phone Number: 1
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Exited, Not finished
+
+
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+Item: Dolphin, Price: 7.20
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Pink Salmon, Price: 7.20
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+Item: Scoop Of Chips, Price: 3.00
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+Customer Name: 1
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Item: Flounder, Price: 4.10
+Customer Name: a
+Customer Phone Number: 1
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-19
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+----------------
+Today's date:2022-02-22
+Exited, Not finished
