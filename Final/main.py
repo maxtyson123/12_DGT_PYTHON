@@ -2,6 +2,8 @@
 #RUN ON CMD (NOT IDLE) FOR BEST EXPERIENCE
 #VERSION CONTROL AT https://github.com/maxtyson123/12_DGT_PYTHON/
 
+#VER 53
+
 #DEPENDICES
 import os
 import os.path
@@ -24,13 +26,50 @@ venvPipExec =""
 chatBotLoc =""
 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
-fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips"]
-fishprice = [4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
-userOrder = []
-userOrderPrice = []
-debugMode = ["venv","idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
+fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips"],[4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
+fishs[0].append("Type 'back' To Go Back") #ADD THE BACK TEXT
+fishs[1].append(0.00) #ADD THHE NULL PRICE FOR BACK
+userOrder = [],[]
+debugMode = ["idle","DEBUG","chatBot"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip)
 customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
 #FUNCTIONS
+def deletePortion(FilePath, startLine, endLine):
+     file = open(FilePath, 'r+') #open the file (read)
+     lines = file.readlines()
+     file = open(FilePath, 'w+') #open the file (write)
+     for number, line in enumerate(lines):
+        if number not in range(startLine, endLine):
+            file.write(line)
+        else:
+             file.write("Data DELETED \n")
+     file.close()       
+def getEndLine(FilePath, sartLine, endIndicator):
+     file = open(FilePath, 'r+') #open the file
+     current = 0
+     current2 = 0
+     lines = file.readlines() #read the lines
+     beginCounter2 = False
+     for x in lines:      
+         current += 1
+         if int(current) == int(sartLine):
+            current2 = current
+            beginCounter2 = True 
+         elif beginCounter2 == True:
+             current2 += 1
+             if endIndicator in x:
+              print(current2)
+              return current2
+def checkTwoLines(FilePath, fileArgs1, fileArgs2):
+     file = open(FilePath, 'r+') #open the file
+     current = 0 
+     lines = file.readlines() #read the lines
+     for x in lines:
+         current += 1
+         if fileArgs1 in x and fileArgs2 in x:
+
+             return current
+     return False
+
 def fakeDetails():
  global customerData
  customerData.append("ORDER VIA BOT")
@@ -38,7 +77,8 @@ def fakeDetails():
  customerData.append(1)
  customerData.append(1)
 def fishNameToNumber(fishName):
-     fish = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin"]
+     global fishs
+     fish = fishs[0]
      fishNumber = 0
      for x in fish:
           fishNumber += 1
@@ -63,7 +103,7 @@ def customData(FilePath, fileArgs):
 def howManyInArray(arrayName):
      arrayNum = 0
      for x in arrayName:
-         arrayNum = arrayNum + 1
+         arrayNum += 1
      return arrayNum   
 def checkFish(fish, array):
     print("CHECKING FISH") 
@@ -87,10 +127,10 @@ def checkFile(FilePath, fileArgs):
          if str(x) == str(fileArgs): #if it is the same return true
             return True  
 def deleteLine(FilePath, fileArgs):
-     with open(FilePath, "r") as f:
-         lines = f.readlines()
-     with open(FilePath, "w") as f:
-      for line in lines:
+     f = open(FilePath, "r") #open in read mode
+     lines = f.readlines() 
+     f = open(FilePath, "w") #open in write mode
+     for line in lines:
         if line.strip("\n") != fileArgs:
             f.write(line)
 
@@ -99,14 +139,11 @@ def addToOrder(strItemID, amt):
      botRun = checkFile("data.txt","InABotEmulateTrue")
     
      global userOrder
-     global userOrderPrice
      global totalCost
      global customerData
      global fishs
-     global fishprice
-
-     foodList  = fishs
-     priceList = fishprice
+     foodList  = fishs[0]
+     priceList = fishs[1]
      itemID = int(strItemID)#convert to into int
      if len(customerData) == 0: #check if there is the required info
           if botRun != True:
@@ -137,15 +174,15 @@ def addToOrder(strItemID, amt):
          if printData == "data":
           print("set chips price")
          totalCost = totalCost + chipsPrice #add the cost
-         userOrder.append (str(amt+" scoops of chips")) #and the amount of scoops
-         userOrderPrice.append(chipsPrice) #add the cost to the list
+         userOrder[0].append (str(amt+" scoops of chips")) #and the amount of scoops
+         userOrder[1].append(chipsPrice) #add the cost to the list
          if printData == "data":
           print("appened to list")
          if botRun != True: #this just makes sure the chatgui.py program doesnt run this
           fishMenu()#go back 
      print(" The most fish you can order is 7.") # alert the user of the max     
      for x in range(int(amt)):
-       amtOfFish = checkFish(foodList[itemID], userOrder)    
+       amtOfFish = checkFish(foodList[itemID], userOrder[0])    
        if amtOfFish == 7:
          if botRun != True:   
           error("Max amount for "+foodList[itemID] +" has been ordered")
@@ -164,8 +201,8 @@ def addToOrder(strItemID, amt):
                 print("Fish type: Frozen")
            totalCost = totalCost - 1.05 #take away the discount
            fishPrice = priceList[itemID] - 1.05
-        userOrder.append(foodList[itemID])
-        userOrderPrice.append(fishPrice)
+        userOrder[0].append(foodList[itemID])
+        userOrder[1].append(fishPrice)
         if printData == "data":
            print("appened to list")
         f = open(tempPath+"\session.txt", "a")
@@ -227,7 +264,9 @@ def printSingleMenu(printThis):
     for x in range(len(printThis)): #for everything in the array print it plus its number
         print ("["+str(x)+"] "+printThis[x])
     print ("##################################################################################################################")
-def printDualMenu(printThis,priceThis):
+def printDualMenu(multiArray):
+    printThis = multiArray[0]
+    priceThis = multiArray[1]
     print ("##################################################################################################################")
     for x in range(len(printThis)): #for everything in the array print it plus its number 
         priceTag = "#"+"$"+str("{:.2f}".format(priceThis[x]))+"#" #this is to make the whole output is formated with ljust
@@ -377,7 +416,6 @@ def runAgain():
  printData = debugCheck("data")    
  global colour
  global userOrder
- global userOrderPrice
  global amtOfFish
  global totalCost
  clear()   
@@ -393,8 +431,8 @@ def runAgain():
     if printData == "data":
       print("Reset the file") 
     #clear the lists
-    userOrder.clear()
-    userOrderPrice.clear()
+    userOrder[0].clear()
+    userOrder[1].clear()
     customerData.clear()
     if printData == "data":
       print("reset the array/lists")
@@ -413,7 +451,6 @@ def finish():
  printData = debugCheck("data")
  global colour
  global userOrder
- global userOrderPrice
  global totalCost
  global customerData
  clear()   
@@ -425,7 +462,7 @@ def finish():
  if printData == "data":
       print("Checked customer info")    
  print("---ITEMS---")
- printDualMenu(userOrder, userOrderPrice)#print the user  listss
+ printDualMenu(userOrder)#print the user  listss
 
  print("---TYPES---")
  if customerData[3] == "0": #if its delivery
@@ -467,10 +504,8 @@ def fishMenu():
  user = 999
  logo() #Print the logo
  global fishs
- global fishprice
- fishs.append("Type 'back' To Go Back")
- fishprice.append(0.00)
- printDualMenu(fishs, fishprice) #Print printDualMenu
+
+ printDualMenu(fishs) #Print printDualMenu
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')   
  try:
    int(user) #trys to convert to int
@@ -480,8 +515,10 @@ def fishMenu():
  except ValueError: #if it cant then return error
       isInt = False
       
- if isInt != False: #if it is not a error    
-  if int(user) in range(0,13): 
+ if isInt != False: #if it is not a error
+  fishRange = howManyInArray(fishs[0])
+  fishRange -= 1
+  if int(user) in range(fishRange): 
      addToOrder(user, 0)
   else: #if it is an int but not in the range then return an error
         error("Not an option")
@@ -506,7 +543,7 @@ def CustomerDetails():
     if printData == "data":
       print("Reseting file")      
  name = input (colour+"Please enter your name: "+'\x1b[0m') #Yes i know it allows a number but thats  bc what if your named prince harry the 3rd? 
- f.write("Customer Name: "+name+"\n")
+
  customerData.append(name)
  if printData == "data":
       print("Got and Set Name")   
@@ -522,7 +559,7 @@ def CustomerDetails():
    error("Not an number, Re running ")
    customerData.clear() # resets the user data
    CustomerDetails()
- f.write("Customer Phone Number: "+phoneNumber+"\n")
+
  customerData.append(phoneNumber)
  if printData == "data":
       print("Got phone number")   
@@ -533,13 +570,12 @@ def CustomerDetails():
  printSingleMenu(frozenOrCooked) #Print printSingleMenu
  pickFrozenOrCooked = input (colour+"Please choose an option: "+'\x1b[0m')
  if pickFrozenOrCooked == "0":
-       f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
+     
        customerData.append(pickFrozenOrCooked)
        
  elif pickFrozenOrCooked == "1":
         customerData.append(pickFrozenOrCooked)
-        f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
-        
+ 
  else:
    error("Not an option, Re running ")
    customerData.clear() # resets the user data
@@ -551,11 +587,11 @@ def CustomerDetails():
  printSingleMenu(pickUpOrDelivery)
  pickPickUpOrDelivery = input (colour+"Please choose an option: "+'\x1b[0m')
  if pickPickUpOrDelivery == "0":
-       f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+
        customerData.append(pickPickUpOrDelivery)
  elif pickPickUpOrDelivery == "1":
         customerData.append(pickPickUpOrDelivery)
-        f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+
  else:
    error("Not an option, Re running ")
    customerData.clear() # resets the user data
@@ -565,7 +601,12 @@ def CustomerDetails():
  if customerData[3] == "0":
   adress = input (colour+"Please enter your adress: "+'\x1b[0m')
   customerData.append(adress)
-  f.write("Adress: "+adress+"\n")
+ 
+ f.write("Customer Name: "+name+"\n")
+ f.write("Customer Phone Number: "+phoneNumber+"\n")
+ f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
+ f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
+ f.write("Adress: "+adress+"\n")
  f.close()
  print("All details entered")
  time.sleep(.5)
@@ -574,7 +615,7 @@ def CustomerDetails():
 def main():
  global colour
  global userOrder
- global userOrderPrice
+
  clear()   
  user = 999
  allowDebug = debugCheck("DEBUG")
@@ -601,8 +642,8 @@ def main():
       f.write("Canceled, Not finished"+ "\n") #Used to know why the order was canceled in history file
       f.close()
       reset() #Rest the file
-      userOrder.clear()
-      userOrderPrice.clear()
+      userOrder[0].clear()
+      userOrder[1].clear()
       customerData.clear()
       amtOfFish = 0 #reset the fish
       totalCost = 0.00 # zero out the price
@@ -629,7 +670,6 @@ def DEBUG():
  global customerData
  global tempPath
  global userOrder
- global userOrderPrice
  global totalCost
  global venvExec
  global venvPipExec
@@ -639,7 +679,7 @@ def DEBUG():
  userColor = 0
  
  logo() #Print the logo
- debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir"]
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir", "Delte user data"]
  venvCheck = debugCheck("venv")#Check if virtual
  if venvCheck == "venv":
   
@@ -716,7 +756,7 @@ def DEBUG():
       input("press enter to finish \n")
       DEBUG()
  elif user == "7":
-       printDualMenu(userOrder, userOrderPrice)
+       printDualMenu(userOrder)
        input("press enter to finish \n")
        DEBUG()
  elif user == "8":   
@@ -730,7 +770,15 @@ def DEBUG():
  elif user == "10":   
      print(os.getcwd())
      time.sleep(1.5)
-     DEBUG()      
+     DEBUG()
+ elif user == "11":
+     customerName = input("Customer's Name: ")
+     startLine = checkTwoLines("history.txt","Customer Name:",customerName)
+     endLine = getEndLine("history - Copy.txt", startLine, "----------------")
+     print(str(startLine) +" "+str(endLine))
+     deletePortion("history.txt", startLine, endLine)
+     time.sleep(1.5)
+     DEBUG()       
  elif venvCheck == "venv" and user == str(venvOp1):
       package = input("Package name: ")
       os.system(venvPipExec +' install '+package)
@@ -787,7 +835,8 @@ if botRun != True:
           f.close() 
      print ("##################################################################################################################")
      f = open(tempPath+"\session.txt", "a")
-     f.write("----------------" + "\n") #Header the doc (used to indecate a break between sessions in the history)
+     f.write("----------------") #Header the doc (used to indecate a break between sessions in the history)
+     f.write("\n")
      f.write("Today's date:"+ today + "\n") #Used to know when the order was started 
      f.close()
      if debug == "data":
