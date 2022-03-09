@@ -1,0 +1,45 @@
+
+----------------
+Today's date:2022-03-09
+Customer Name: ABC
+Customer Phone Number: 123
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Adress: N/A
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Item: Shark, Price: 4.10
+Finished
+----------------
+Today's date:2022-03-09
+Customer Name: DEF
+Customer Phone Number: 1
+Pick Frozen Or Cooked: 1
+PickUp Or Delivery: 1
+Adress: N/A
+Finished
+
+
+
+----------------
+Today's date:2022-03-09
+Ran in CMD via Idle
+
+----------------
+Today's date:2022-03-09
+Ran in virtual enviroment
+
+
+----------------
+Today's date:2022-03-09
+Ran in virtual enviroment
+
+
+
+----------------
+Today's date:2022-03-09
+Exited, Not finished
