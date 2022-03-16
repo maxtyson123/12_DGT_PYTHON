@@ -28,12 +28,13 @@ venvPipExec =""
 chatBotLoc =""
 
 randColor = ['\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m'] #the list of random color
-fishs = ["test","Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips"],[99.00,4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
+fishs = ["Shark", "Flounder", "Cod", "Gurnet", "Jon Dory", "Gold Fish", "Snapper", "Pink Salmon", "Tuna", "Smoked Marlin", "Kahwai", "Dolphin","Scoop Of Chips"],[4.10,4.10,4.10,4.10,4.10,4.10,7.20,7.20,7.20,7.20,7.20,7.20,3.00]
 fishs[0].append("Type 'back' To Go Back") #ADD THE BACK TEXT
 fishs[1].append(0.00) #ADD THHE NULL PRICE FOR BACK
 userOrder = [],[]
 debugMode = ["DEBUG"]#Start up Debug tags. TAGS:{idle: Allows debugging on idle} {DEBUG: Turns on debuging mode and allows acess to the debug menu} {Color: Tells the randomizer that color has been set in the debug menu} {data: Prints extra infomation} {ignoreHistory: dont write to the history file} (venv: sets that the virtaul enviroment has been setup so the other imports can work, this is becuse of pip, ver 69 onwards there are errors)
-customerData = [] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
+customerData = ["DEFAULT","PHONENUMBER","FROZEN/COOKED","DELIVERY","N/A"] #Format: ["name: the persons name","phone number","frozen(0) or cooked(1)","dlivery(0) or pick up(1)","adress (last becuase its optinal)"]
+
 #FUNCTIONS
 def findUserData(FilePath, name):
      lineNum = []
@@ -168,14 +169,15 @@ def addToOrder(strItemID, amt):
      foodList  = fishs[0]
      priceList = fishs[1]
      itemID = int(strItemID)#convert to into int
-     if len(customerData) == 0: #check if there is the required info
+     if customerData[0] == "DEFAULT": #check if there is the required info
           if botRun != True:
                error("Customer Info Not Entered, running the menu") 
-               CustomerDetails() #this is becuase it needs to know if the order is cooked or frozen, so it can apply the discount
+               CustomerDetails("run") #this is becuase it needs to know if the order is cooked or frozen, so it can apply the discount
           else:
              return("Customer Info not entered")  
      if botRun != True:
-      print(" The most fish you can order is 7.") # alert the user of the max         
+      amtOfFish = checkFish(foodList[itemID], userOrder[0])        
+      print(" You have ordered: "+str(amtOfFish)+" "+foodList[itemID]+", the most you can order is 7.") # alert the user of the max     
       amt = input (colour+" How many "+foodList[itemID] +" would you like: "+'\x1b[0m') #ask how many of the item the user would like
      try:
          int(amt) #trys to convert to int
@@ -232,7 +234,9 @@ def addToOrder(strItemID, amt):
                 print("Fish type: Frozen")
            totalCost = totalCost - 1.05 #take away the discount
            fishPrice = priceList[itemID] - 1.05
-        userOrder[0].append(foodList[itemID])
+           userOrder[0].append(foodList[itemID])
+        else:   
+          userOrder[0].append(foodList[itemID])
         userOrder[1].append(fishPrice)
         if printData == "data":
            print("appened to list")
@@ -280,7 +284,7 @@ def reset():
      f.close()
      userOrder[0].clear()
      userOrder[1].clear()
-     customerData.clear()
+     customerData = ["DEFAULT","PHONENUMBER","FROZEN/COOKED","DELIVERY","N/A"] 
      if printData == "data":
       print("reset the array/lists")
      amtOfFish = 0 #reset the fish
@@ -438,7 +442,47 @@ def venv():
      f.write("Ran in virtual enviroment"+ "\n") #Used to know why the order was canceled in history file 
      f.close()
           
-    quit() 
+    quit()
+def removeItem():
+ clear()
+ global userOrder
+ order = []
+ backID = howManyInArray(userOrder[0])
+ backID -=1 
+ back = {"b","back","bk","bck","backk","bcak"}
+ back.add(str(backID))
+ for x in userOrder[0]:
+     order.append(x) 
+ order.append("Type 'back' To Go Back")
+ user = 999
+ logo()        #Print the logo
+ printSingleMenu(order) #Print printSingleMenu
+ user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
+ for x in back:
+     user = user.lower() 
+     if user == x:
+       user = "back"
+       break 
+ try:
+   int(user) #trys to convert to int
+   isInt = True
+ except ValueError: #if it cant then return error
+      isInt = False
+      
+ if isInt != False: #if it is not a error
+  orderRange = howManyInArray(order)
+ 
+  if int(user) in range(orderRange): 
+     del userOrder[0][int(user)]
+     removeItem()  
+  else: #if it is an int but not in the range then return an error
+        error("Not an option")
+        removeItem()  
+ elif user == "back": #the range wont let 13 blah blah
+     main()   
+ else:
+        error("'"+user+"' is not a option")
+        removeItem()          
 def runInIdle():
  user = 999
  logo()        #Print the logo
@@ -555,14 +599,27 @@ def finish():
  runAgain()
 def fishMenu():
  global colour
+ global fishs
  printData = debugCheck("data")
  clear()   
  user = 999
+ fishRange = howManyInArray(fishs[0])
+ fishRange -=1 
+ back = {"b","back","bk","bck","backk","bcak"}
+
+ back.add(str(fishRange))
+ print(back)
  logo() #Print the logo
- global fishs
+
 
  printDualMenu(fishs) #Print printDualMenu
- user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')   
+ user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
+ for x in back:
+     user = user.lower() 
+     if user == x:
+       user = "back"
+       break 
+          
  try:
    int(user) #trys to convert to int
    isInt = True
@@ -572,8 +629,8 @@ def fishMenu():
       isInt = False
       
  if isInt != False: #if it is not a error
-  fishRange = howManyInArray(fishs[0])
-  fishRange -= 1
+  
+  fishRange -= 1 #take away 1 so "back" isnt included
   if int(user) in range(fishRange): 
      addToOrder(user, 0)
   else: #if it is an int but not in the range then return an error
@@ -583,102 +640,187 @@ def fishMenu():
      main()   
  else:
         error("'"+user+"' is not a option")
-        fishMenu()     
-def CustomerDetails():   
+        fishMenu()
+def editDetails():
+ clear()
+ global customerData
+ userData = []
+ froz = 0
+ for x in customerData:
+     if x == "0":
+      if froz == 0:
+        userData.append("Type: Frozen")
+        froz = 1
+      else:
+        userData.append("Type: Delivery")      
+     elif x == "1":
+        if froz == 0:
+         userData.append("Type: Cooked")
+         froz = 1
+        else:
+         userData.append("Type: PickUp")      
+     else:     
+      userData.append(str(x)) 
+ userData.append("Type 'back' To Go Back")
+ backID = howManyInArray(userData)
+ backID -=1
+ back = {"b","back","bk","bck","backk","bcak"}
+ back.add(str(backID))
+ user = 999
+ logo()        #Print the logo
+ printSingleMenu(userData) #Print printSingleMenu
+ print(" WHAT INFO DO YOU WANT TO EDIT?")
+ user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
+ for x in back:
+     user = user.lower() 
+     if user == x:
+       user = "back"
+       break 
+ try:
+   int(user) #trys to convert to int
+   isInt = True
+ except ValueError: #if it cant then return error
+      isInt = False     
+ if isInt != False: #if it is not a error
+  orderRange = howManyInArray(customerData)
+  print(orderRange)
+  if int(user) in range(orderRange): 
+     CustomerDetails(int(user))
+     CustomerDetails("run") 
+  else: #if it is an int but not in the range then return an error
+        error("Not an option")
+        CustomerDetails("run")  
+ elif user == "back":
+     CustomerDetails("edited") 
+      
+     main()   
+ else:
+        error("'"+user+"' is not a option")
+        CustomerDetails("run") 
+def CustomerDetails(mode):   
  global colour
  global customerData
  global tempPath
- clear()   
+ 
  user = 999
  adress = "N/A"
  printData = debugCheck("data")
- logo() #Print the logo
- print ("##################################################################################################################")
+ 
  f = open(tempPath+"\session.txt", "a") #Doc used for history
- if len(customerData) != 0:
-    customerData.clear() # resets the user data  
-    if printData == "data":
-      print("Reseting file")      
- name = input (colour+"Please enter your name: "+'\x1b[0m') #Yes i know it allows a number but thats  bc what if your named prince harry the 3rd? 
+ if mode == "run":
+    clear()   
+    logo() #Print the logo  
+    if customerData[0] != "DEFAULT":   
+     editDetails()
+     if printData == "data":
+      print("CUSTOMER EDITING DATA")
+    print ("##################################################################################################################")  
+    CustomerDetails(0)
+    CustomerDetails(1)
+    CustomerDetails(2)
+    CustomerDetails(3)
+    if customerData[3] == "0":
+       CustomerDetails(4)  
+    CustomerDetails("file")
+    print("All details entered")
+    time.sleep(0.5)
+    main()
+ 
 
- customerData.append(name)
- if printData == "data":
-      print("Got and Set Name")   
- phoneNumber = input (colour+"Please enter your phone number: "+'\x1b[0m')
- phoneisNumber = phoneNumber    
- try:
+ elif mode == 0:
+  name = input (colour+"Please enter your name: "+'\x1b[0m') #Yes i know it allows a number but thats  bc what if your named prince harry the 3rd? 
+  customerData[0] = name
+  return
+ elif mode == 1:     
+  phoneNumber = input (colour+"Please enter your phone number: "+'\x1b[0m')
+  phoneisNumber = phoneNumber    
+  try:
     int(phoneNumber) #trys to convert to int
     phoneisNumber = True
- except ValueError: #if it cant the return error
+  except ValueError: #if it cant the return error
     phoneisNumber = False
-
- if phoneisNumber == False:
-
+  if phoneisNumber == False:
    error("'"+str(phoneNumber)+"' is not a number")
-   customerData.clear() # resets the user data
-   CustomerDetails()
-
- customerData.append(phoneNumber)
- if printData == "data":
-      print("Got phone number")   
- print("")
-
- frozenOrCooked = ["Frozen","Cooked"]
-
- printSingleMenu(frozenOrCooked) #Print printSingleMenu
- pickFrozenOrCooked = input (colour+"Please choose an option: "+'\x1b[0m')
- if pickFrozenOrCooked == "0":
-     
-       customerData.append(pickFrozenOrCooked)
-       
- elif pickFrozenOrCooked == "1":
-        customerData.append(pickFrozenOrCooked)
- 
+   CustomerDetails(1)
+  customerData[1] = "+64 "+phoneNumber
+  return
+ elif mode == 2:
+      if customerData[2] != "FROZEN/COOKED":
+       print("This action will "+"RED"+" reset your order.")    
+       awnser = input("Do you wish to continue? [Y/N] : ")
+       awnser = awnser.lower()
+       if awnser == "y":
+            reset()
+            CustomerDetails("run")
+       elif awnser == "n":
+            return
+       else:
+          error("'"+str(awnser)+"' is not a option")
+          return
+      printSingleMenu(["Frozen","Cooked"]) #Print printSingleMenu
+      pickFrozenOrCooked = input (colour+"Please choose an option: "+'\x1b[0m')
+      if pickFrozenOrCooked == "0" or pickFrozenOrCooked == "1":     
+             customerData[2] = pickFrozenOrCooked       
+      else:
+        error("'"+str(pickFrozenOrCooked)+"' is not a option")
+        CustomerDetails(2)
+      return  
+ elif mode == 3:     
+      printSingleMenu(["Delivery","PickUp"])
+      pickPickUpOrDelivery = input (colour+"Please choose an option: "+'\x1b[0m')
+      if pickPickUpOrDelivery == "0" or pickPickUpOrDelivery == "1" :
+          customerData[3] = pickPickUpOrDelivery  
+      else:
+        error("'"+str(pickPickUpOrDelivery)+"' is not a option")
+        CustomerDetails(3)    
+      return
+ elif mode == (4):
+       adress = input (colour+"Please enter your adress: "+'\x1b[0m')
+       customerData[4] = adress
+       return
+ elif mode == "file":
+      f.write("Customer Name: "+customerData[0]+"\n")
+      f.write("Customer Phone Number: "+customerData[1]+"\n")
+      f.write("Pick Frozen Or Cooked: "+customerData[2]+"\n")
+      f.write("PickUp Or Delivery: "+customerData[3]+"\n")
+      f.write("Adress: "+customerData[4]+"\n")
+      f.close()
+      return
+ elif mode == "edited":
+      f.write("NEW CUSTOMER DATA: \n")
+      f.close()
+      CustomerDetails("file")
+      return
  else:
-   error("'"+str(pickFrozenOrCooked)+"' is not a option")
-   customerData.clear() # resets the user data
-   CustomerDetails()
- print("")
- if printData == "data":
-      print("Got Frozen Or Cooked number")   
- pickUpOrDelivery = ["Delivery","PickUp"]
- printSingleMenu(pickUpOrDelivery)
- pickPickUpOrDelivery = input (colour+"Please choose an option: "+'\x1b[0m')
- if pickPickUpOrDelivery == "0":
-
-       customerData.append(pickPickUpOrDelivery)
- elif pickPickUpOrDelivery == "1":
-        customerData.append(pickPickUpOrDelivery)
-
- else:
-   error("'"+str(pickPickUpOrDelivery)+"' is not a option")
-   customerData.clear() # resets the user data
-   CustomerDetails()
- if printData == "data":
-      print("Got Pick Up Or Delivery number")     
- if customerData[3] == "0":
-  adress = input (colour+"Please enter your adress: "+'\x1b[0m')
-  customerData.append(adress)
- 
- f.write("Customer Name: "+name+"\n")
- f.write("Customer Phone Number: "+phoneNumber+"\n")
- f.write("Pick Frozen Or Cooked: "+pickFrozenOrCooked+"\n")
- f.write("PickUp Or Delivery: "+pickPickUpOrDelivery+"\n")
- f.write("Adress: "+adress+"\n")
- f.close()
- print("All details entered")
- time.sleep(.5)
- main()
+   error("Not a mode")
+   main()
      
 def main():
  global colour
  global userOrder
-
+ global customerData
+ global totalCost    
+ ordercheck = userOrder[0]    
  clear()   
  user = 999
  allowDebug = debugCheck("DEBUG")
  logo() #Print the logo
- main_printSingleMenu = ["Customer Details","Fish and Chip Orders","Finish","Cancel Current"]
+ remv = -99999999999999999999999999999999999999999999
+ if customerData[0] != "DEFAULT":
+  div = "##################################################################################################################"    
+  print(div)
+  sessionData = "Customer Name: "+customerData[0]+"   OrderCost: $"+"{:.2f}".format(totalCost)
+  legnth = len(div)
+  legnth -= len(sessionData)
+  legnth = legnth/2
+  print(" "*int(legnth)+sessionData)
+  main_printSingleMenu = ["Edit Customer Details","Fish and Chip Orders","Finish","Cancel Current"]
+ else:
+  main_printSingleMenu = ["Set Customer Details"+'\033[90m',"Fish and Chip Orders","Finish"+'\x1b[0m',"Cancel Current"]    
+ if len(ordercheck) != 0:
+    main_printSingleMenu.append("Remove an item from order")
+    remv = howManyInArray(main_printSingleMenu)  #get its place for the input
+    remv -= 1 #take away 1 becuase the array starts at 0 but the counter starts at 1
  main_printSingleMenu.append("Exit")
  exit1 = howManyInArray(main_printSingleMenu)  #get its place for the input
  exit1 = exit1 - 1 #take away 1 becuase the array starts at 0 but the counter starts at 1
@@ -686,7 +828,7 @@ def main():
  user = input (colour+" Please make a choice via number and then press enter to confirm: "+'\x1b[0m')
  if user == "0":
     print("0")
-    CustomerDetails()
+    CustomerDetails("run")
  elif user == "1":
       print("1")
       fishMenu()   
@@ -702,6 +844,10 @@ def main():
       reset() #Rest the file
 
       main()
+ elif user == str(remv):
+      print(remv)
+      print(user)
+      removeItem()
  elif user == str(exit1):
       print(exit1)
       print(user)
@@ -733,7 +879,7 @@ def DEBUG():
  userColor = 0
  
  logo() #Print the logo
- debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir", "Delte user data","Get user lines from history", "Print user history from line"]
+ debug_printSingleMenu = ["Select Theme Color","Temp File Location","Print Data While running","Print User Data","Print TempFile","History","Print Total Cost","Print User Items","Add a debug tag","Print debug tags","Get current dir", "Delte user data","Print user data from history"]
  venvCheck = debugCheck("venv")#Check if virtual
  if venvCheck == "venv":
   
@@ -845,6 +991,7 @@ def DEBUG():
      name = input("Customer's Name: ")
      lines = findUserData("history.txt", name)
      print(lines)
+     print("----------------")
      for x in lines:
       startLine = int(x)    
       startLine -= 1 
@@ -855,20 +1002,6 @@ def DEBUG():
       readPortion("history.txt", startLine, endLine)
      input("press enter to finish \n")
      DEBUG()
- elif user == "13":
-      startLine = input("Line: ") #makes it easier to read from the history
-      try:
-           int(startLine) #trys to convert to int
-           isInt = True
-     
-      except ValueError: #if it cant then return error
-       isInt = False
-      if isInt == False:
-         error("NOT A LINE")
-         DEBUG()
-     
-      input("press enter to finish \n")
-      DEBUG()
  elif venvCheck == "venv" and user == str(venvOp1):
       package = input("Package name: ")
       os.system(venvPipExec +' install '+package)
