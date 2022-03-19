@@ -14,10 +14,11 @@ touching = ""
 wall = ""
 diricetion = ""
 secretLevel = False
+jump = False        
 def drawLevel(array):
     for x in array:
         print(x)
-        
+
 def storeLevel(num):
     level = []
     if num == -2:
@@ -78,7 +79,7 @@ def storeLevel(num):
      level.append("+                                                                                                                   +")
      level.append("+                                                                                                                   +")
      level.append("+                                         Welcome to ASCII GAME by Max Tyson                                        +")
-     level.append("+                     A console game made in pyton using only varibles, maths and functions                        +")
+     level.append("+                     A console game made in pyton using only varibles, maths and functions                         +")
      level.append("+                                                                                                                   +")
      level.append("+                                                                                                                   +")
      level.append("+                                                                                                                   +")
@@ -143,7 +144,7 @@ def storeLevel(num):
      level.append("+                                                                            @@@@@@                                 +")
      level.append("+                                                                @@@@@@                                             +")
      level.append("+                                                     @@@@@@                                                        +")
-     level.append("+                                       @@@@@@@@@                                                                    +")
+     level.append("+                                       @@@@@@@@@                                                                   +")
      level.append("+         @@@@@@@@@@@@@@@@@@@@@@@@@                                                                                 +")
      level.append("+         @@@@@@@@@@@@@@@@@@@@@@@@@                                                                                 +")
      level.append("+         @@@@@@@@@@@@@@@@@@@@@@@@@                                                                                 +")
@@ -207,7 +208,7 @@ def storeLevel(num):
      level.append("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if num == 5:
      level.append("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-     level.append("+                                                              __                                                      +")
+     level.append("+                                                              __                                                   +")
      level.append("+                                                             /  \                                                  +")
      level.append("+%%%%%%%%%%%%%%%%%%%%%The g1itch seems to be getting worsE   ! ** !                                                 +")
      level.append("+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+")
@@ -250,17 +251,20 @@ def storeLevel(num):
      level.append("+                       !                                              !                             1!             +")
      level.append("+       !                                                                                                       __  +")
      level.append("+                                                                                                              /  \ +")
-     level.append("+                                         !                                               1                     ! **+")
+     level.append("+                                         !                                               1                     !   +")
      level.append("$                    !                                                                                          \__/+")
-     level.append("+                                                                         !            1                            +")
+     level.append("+                                                                         !            1           /__\             +")
      level.append("+                                                                                                                   +")
-     level.append("+         !   10101                                                                                                 +")
+     level.append("+         !   10101                                                                                  **** *         +")
      level.append("+                                   !                 !                                 !      1      !             +")
-     level.append("+                                                                                                                   +")
+     level.append("+                                                                                               \_______/           +")
      level.append("+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+")
      level.append("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if num == 7:
      level.append("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+     level.append("+                                                                                                                   +")
+     level.append("+                                                                                                                   +")
+     level.append("+                    CMD >> Game()                                                                                  +")
      level.append("+                                                                                                                   +")
      level.append("+                    CMD >> restarting ...                                                                          +")
      level.append("+                    CMD >> checking score .....                                                                    +")
@@ -269,9 +273,6 @@ def storeLevel(num):
      level.append("+                                                                                                                   +")
      level.append("+                    CMD >> [USER] How to exit???                                                                   +")
      level.append("+                    CMD >> ctrl C                                                                                  +")
-     level.append("+                                                                                                                   +")
-     level.append("+                                                                                                                   +")
-     level.append("+                                                                                                                   +")
      level.append("+                                                                                                                   +")
      level.append("+                                                                                                                   +")
      level.append("+                                                                                                                   +")
@@ -292,6 +293,7 @@ def storePlayer(x,y,draw):
     global newLevel
     global diricetion
     global secretLevel
+
     tmp = []
     result = []
     for i in reversed(draw):
@@ -311,9 +313,13 @@ def storePlayer(x,y,draw):
      if X[x-1] == "$":
           secretLevel = True       
      X[x] = "["
-     if X[x-1] == "+":
+     if X[x-1] == "+"  or  X[x-1] == "@":
         wall = "LeftWall"
-    
+    if diricetion == "left":        
+     NY = tmp[y+1]
+     NX = list(NY)
+     if NX[x+1] == "+" or NX[x+1] == "@":
+        wall = "Roof"
     ######
     if diricetion == "left":     
      if X[x1] != "@":  
@@ -356,8 +362,13 @@ def storePlayer(x,y,draw):
     ######    
     if X[x3] != "@":
      X[x3] = "]"
-     if X[x3+1] == "+":
+     if X[x3+1] == "+" or  X[x3+1] == "@":
         wall = "RightWall"
+     if diricetion == "right":        
+      NY = tmp[y+1]
+      NX = list(NY)
+      if NX[x3] == "+" or NX[x3] == "@":
+        wall = "Roof"   
     ######    
     text = ""
     text = text.join(X)
@@ -381,6 +392,70 @@ def clear():
     if os.name in ('nt', 'dos'): #if in windows
         command = 'cls'
     os.system(command)
+def platformer():
+    global play
+    global gameInput
+    global newLevel
+    global x
+    global y
+    global posX 
+    global posY 
+    global levelId 
+    global touching 
+    global wall 
+    global diricetion 
+    global secretLevel
+    global jump 
+    while play == True:   
+     clear()
+     x = 0
+     y = 0
+     if touching == "Spike":
+        posX = 5
+        posY = 5 
+     if newLevel == True:
+        levelId += 1
+        newLevel = False
+        posX = 5
+        posY = 5
+     if secretLevel == True:
+        levelId = 9
+        secretLevel = False
+        posX = 5
+        posY = 5   
+     if keyboard.is_pressed('right arrow') and  wall != "RightWall" or keyboard.is_pressed('d') and  wall != "RightWall":
+         x += 1
+         diricetion = "right"
+         time.sleep(0.001)
+     elif keyboard.is_pressed('left arrow') and  wall != "LeftWall" or keyboard.is_pressed('a') and  wall != "LeftWall":
+         x -= 1
+         diricetion = "left"
+         time.sleep(0.001)
+     posX += x
+     if  touching == "Ground":
+         posY += 1 
+     if touching == "OnGround":
+        if jump != True: 
+         if keyboard.is_pressed('up arrow') or keyboard.is_pressed('w'):
+          jump = True
+          countJump = 0
+          time.sleep(0.01)
+     if jump == True:
+        if countJump != 4:  
+         countJump += 1
+         if wall != "Roof": 
+          posY += 1
+        else:
+         jump = False   
+     elif touching  == "Air":
+         y -= 1
+     posY += y
+     drawGame()
+     print("Wall: "+ wall)
+     print("Level: "+ str(levelId))
+     print("Touching: "+ str(touching))
+     print("Pos: "+str(posX)+", "+str(posY))
+     time.sleep(0.05)
 
 def start():
   global diricetion
@@ -429,57 +504,17 @@ def start():
    across += 1
    
 #start()
-levelId = 0
+levelId = 4
 cmd = True
 while cmd == True:
    inpt = input('CMD>> ')
    if inpt == "Game()":
       inpt = input('CMD>> Password? ')
       if inpt == "superSecretPassword":
-          break
+          platformer()
    if inpt == "Help":
        print("Shame you have no clue whats going on...")
    else:
       print("CMD>> Unknown Command") 
-while play == True:
- clear()
- x = 0
- y = 0
- if touching == "Spike":
-    posX = 5
-    posY = 5 
- if newLevel == True:
-    levelId += 1
-    newLevel = False
-    posX = 5
-    posY = 5
- if secretLevel == True:
-    levelId = 9
-    secretLevel = False
-    posX = 5
-    posY = 5   
- if keyboard.is_pressed('right arrow') and  wall != "RightWall" or keyboard.is_pressed('d') and  wall != "RightWall":
-     x += 1
-     diricetion = "right"
-     time.sleep(0.001)
- elif keyboard.is_pressed('left arrow') and  wall != "LeftWall" or keyboard.is_pressed('a') and  wall != "LeftWall":
-     x -= 1
-     diricetion = "left"
-     time.sleep(0.001)
- posX += x
- if  touching == "Ground":
-     posY += 1 
- if touching == "OnGround":
-    if keyboard.is_pressed('up arrow') or keyboard.is_pressed('w'):
-     y = 6
-     time.sleep(0.01)
- if touching  == "Air":
-     y -= 1
- posY += y
- drawGame()
- print("Wall: "+ wall)
- print("Level: "+ str(levelId))
- print("Touching: "+ str(touching))
- print("Pos: "+str(posX)+", "+str(posY))
- time.sleep(0.05)
+
 
