@@ -504,7 +504,7 @@ def start():
    across += 1
    
 #start()
-levelId = 4
+levelId = 0
 cmd = True
 while cmd == True:
    inpt = input('CMD>> ')
